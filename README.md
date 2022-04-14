@@ -1,5 +1,5 @@
 # group3proj1
 - Allen Tran (@TheDangerousAsian)
 - Saim Sheikh (@saimsheikh1)
-- Name (@username)
+- Simone LoFaso (@simone-lofaso)
 - Name (@username)

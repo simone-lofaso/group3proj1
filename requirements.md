@@ -2,25 +2,26 @@
 
 ## Functional Requirements
 
-1. requirement
-2. requirement
-3. requirement
-4. requirement
-5. requirement
-6. requirement
-7. requirement
-8. requirement
-9. requirement
-10. requirement
-11. requirement
-12. requirement
+1. Login
+2. Logout
+3. Create New Account
+4. Delete Account
+5. Search
+6. Add to cart
+7. Remove from cart
+8. View item description
+9. Save payment info
+10. Buy Now
+11. Quantity 
+12. Post item for sale
+13. 13. *Add pictures for items  ------------ HP
 
 ## Non-functional Requirements
 
-1. non-functional
-2. non-functional
-3. non-functional
-4. non-functional
+1. Round up for charity
+2. Change Language? ***** Highpass
+3. Light/Dark Mode?
+4. Are you human? (Captcha)
 
 ## Use Cases
 

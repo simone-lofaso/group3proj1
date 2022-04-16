@@ -25,36 +25,38 @@
 
 ## Use Cases
 
-1. Use Case Name (Should match functional requirement name)
-- **Pre-condition:** <can be a list or short description> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+1. Search 
+- **Pre-condition:** <can be a list or short description> The textbox contains text that is a String with information that could or could not be on the website
 
-- **Trigger:** <can be a list or short description> Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. 
+- **Trigger:** <can be a list or short description> The event would trigger once the enter button is clicked or when the search button is clicked
 
 - **Primary Sequence:**
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Et sequi incidunt 
-  3. Quis aute iure reprehenderit
-  4. ... 
-  5. ...
-  6. ...
-  7. ...
-  8. ...
-  9. ...
-  10. <Try to stick to a max of 10 steps>
+  1. System asks the user for text to enter in the search box
+  2. User types in the text in the search box
+  3. User hits enter or clicks the search button
+  4. System checks with its list of products to see what brings up a match
+  5. System brings up a filtered list of products to the user
+  6. User looks for products that have narrowed down his search using the key words in the search box
 
-- **Primary Postconditions:** <can be a list or short description> 
+- **Primary Postconditions:** <can be a list or short description> The user has a filtered product list who is searching with the hope to find a product that they searched for
 
 - **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
+  1. System asks the user for text to enter in the search box
+  2. User types in the text in the search box
+  3. User hits enter or clicks the search button
+  4. System check with its list of products but can't find any matches
+  5. System brings displays "No Matches Found"
+  6. User either changes text in search box (repeat sequence) or leaves website
 
 - **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
+  1. System asks user for text to enter in the search box
+  2. User types nothing into the search box
+  3. User hits enter or clicks on the search button
+  4. System can't find any matches with an empty string
+  5. 
+
 2. Use Case Name (Should match functional requirement name)
    ...

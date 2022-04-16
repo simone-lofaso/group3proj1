@@ -2,26 +2,25 @@
 
 ## Functional Requirements
 
-1. Login
-2. Logout
-3. Create New Account
-4. Delete Account
-5. Search
-6. Add to cart
-7. Remove from cart
-8. View item description
-9. Save payment info
-10. Buy Now
-11. Quantity 
-12. Post item for sale
-13. *Add pictures for items  ------------ HP
+1. Login (Yashik)
+2. Logout (Yashik) 
+3. Create New Account (Yashik)
+4. Delete Account (Yashik)
+5. Search (Simone)
+6. Add to cart (Simone)
+7. Remove from cart (Simone)
+8. View item description (Simone)
+9. Save payment info (Allen)
+10. Buy number of products (Allen)
+11. Post item for sale (Allen)
+12. *Add pictures for items (Allen)
 
 ## Non-functional Requirements
 
-1. Round up for charity
-2. Change Language? ***** Highpass
-3. Light/Dark Mode?
-4. Are you human? (Captcha)
+1. Round up for charity (Saim)
+2. Change Language? (Saim)
+3. Light/Dark Mode? (Saim)
+4. Captcha (Saim)
 
 ## Use Cases
 
@@ -107,3 +106,5 @@
   3. System reduces the quantity by one
   4. System decreases the quantity of the product by one
   5. The ticker decreases the value by one in the cart
+
+4. 

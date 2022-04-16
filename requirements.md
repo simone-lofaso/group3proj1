@@ -47,7 +47,7 @@
   2. User types in the text in the search box
   3. User hits enter or clicks the search button
   4. System check with its list of products but can't find any matches
-  5. System brings displays "No Matches Found"
+  5. System displays "No Matches Found"
   6. User either changes text in search box (repeat sequence) or leaves website
 
 - **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
@@ -56,7 +56,30 @@
   2. User types nothing into the search box
   3. User hits enter or clicks on the search button
   4. System can't find any matches with an empty string
-  5. 
+  5. System filters the products to none (no products)
+  6. System displays "No Matches Found"
+  7. User either changes text in search box (repeat sequence) or leaves website
 
-2. Use Case Name (Should match functional requirement name)
-   ...
+2. Add to cart
+- **Pre-condition:** <can be a list or short description> User is on the product page and clicks on the "add to cart" button
+
+- **Trigger:** <can be a list or short description> The event would trigger once the "add to cart" button is clicked 
+
+- **Primary Sequence:**
+  
+  1. System waits for the user to click the button
+  2. User clicks button
+  3. System checks if product is found in database
+  4. System adds the product to the cart (with or without other products)
+  5. System brings up display message: "Item added to cart"
+
+- **Primary Postconditions:** <can be a list or short description> The system added the product the user requested into the cart without any problems
+
+- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+  
+  1. System waits for the user to click the button
+  2. User increments the quanitity from one to another number
+  3. User clicks button
+  4. System checks if product is found in database
+  5. System adds the multiple copies of the product to the cart (with or without other products)
+  6. User either changes text in search box (repeat sequence) or leaves website

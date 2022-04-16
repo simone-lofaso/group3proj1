@@ -25,9 +25,9 @@
 ## Use Cases
 
 1. Search 
-- **Pre-condition:** <can be a list or short description> The textbox contains text that is a String with information that could or could not be on the website
+- **Pre-condition:** The textbox contains text that is a String with information that could or could not be on the website
 
-- **Trigger:** <can be a list or short description> The event would trigger once the enter button is clicked or when the search button is clicked
+- **Trigger:** The event would trigger once the enter button is clicked or when the search button is clicked
 
 - **Primary Sequence:**
   
@@ -38,9 +38,9 @@
   5. System brings up a filtered list of products to the user
   6. User looks for products that have narrowed down his search using the key words in the search box
 
-- **Primary Postconditions:** <can be a list or short description> The user has a filtered product list who is searching with the hope to find a product that they searched for
+- **Primary Postconditions:** The user has a filtered product list who is searching with the hope to find a product that they searched for
 
-- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+- **Alternate Sequence:** 
   
   1. System asks the user for text to enter in the search box
   2. User types in the text in the search box
@@ -49,7 +49,7 @@
   5. System displays "No Matches Found"
   6. User either changes text in search box (repeat sequence) or leaves website
 
-- **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+- **Alternate Sequence:**
   
   1. System asks user for text to enter in the search box
   2. User types nothing into the search box
@@ -60,9 +60,9 @@
   7. User either changes text in search box (repeat sequence) or leaves website
 
 2. Add to cart
-- **Pre-condition:** <can be a list or short description> User is on the product page and clicks on the "add to cart" button
+- **Pre-condition:** User is on the product page and clicks on the "add to cart" button
 
-- **Trigger:** <can be a list or short description> The event would trigger once the "add to cart" button is clicked 
+- **Trigger:** The event would trigger once the "add to cart" button is clicked 
 
 - **Primary Sequence:**
   
@@ -72,9 +72,9 @@
   4. System adds the product to the cart (with or without other products)
   5. System brings up display message: "Item added to cart"
 
-- **Primary Postconditions:** <can be a list or short description> The system added the product the user requested into the cart without any problems
+- **Primary Postconditions:** The system added the product the user requested into the cart without any problems
 
-- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+- **Alternate Sequence:**
   
   1. System waits for the user to click the button
   2. User increments the quanitity from one to another number

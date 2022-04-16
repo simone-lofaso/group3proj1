@@ -14,7 +14,7 @@
 10. Buy Now
 11. Quantity 
 12. Post item for sale
-13. 13. *Add pictures for items  ------------ HP
+13. *Add pictures for items  ------------ HP
 
 ## Non-functional Requirements
 
@@ -83,3 +83,27 @@
   4. System checks if product is found in database
   5. System adds the multiple copies of the product to the cart (with or without other products)
   6. User either changes text in search box (repeat sequence) or leaves website
+
+
+3. Remove from Cart
+- **Pre-condition:** <can be a list or short description> User is on the cart page and has an item or items in the cart
+
+- **Trigger:** <can be a list or short description> The event would trigger once the "remove from cart" button is clicked
+
+- **Primary Sequence:**
+  
+  1. System waits for the user to click the button
+  2. User clicks "remove from cart" button on a particular item
+  3. System reduces the quantity by one (going from 1 --> 0)
+  4. System removes that item from the cart entirely
+  5. System brings up display message: "Item removed from cart"
+
+- **Primary Postconditions:** <can be a list or short description> The system removed the product from the cart page
+
+- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+  
+  1. System waits for the user to click the button
+  2. User clicks "remove from cart" button on a particular item
+  3. System reduces the quantity by one
+  4. System decreases the quantity of the product by one
+  5. The ticker decreases the value by one in the cart

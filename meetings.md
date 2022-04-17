@@ -21,6 +21,10 @@ Members present:
    - Assigned requirements to teammates
    - Will wait for next milestone
 - Simone
+  - Updated README.md
+  - Updated meetings.md
+  - Set requirement goals
+  - Will wait for next milestone
 - Yashik
 
 ### 2022-04-29 at 10:30

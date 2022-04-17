@@ -184,3 +184,5 @@
   3. The system recognizes that their is no card information tied with this account in the database
   4. The system will then redirect the user to the save payment page
 
+7. 
+

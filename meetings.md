@@ -12,15 +12,16 @@
 ## Meetings
 
 
-### 2022-04-15 at 13:30
-<meeting template would go here>
-<only fill in template once you had the meeting>
-<see example on the last date>
-<use date format YYYY-MM-DD at HH:MM>
-
-### 2022-04-22 at 10:30
-<meeting template would go here>
-<only fill in template once you had the meeting>
+### 2022-04-16 at 10:00
+Members present:
+- Allen
+   - Completed use cases 4-6
+   - Updated README.md
+   - Updated meetings.md
+   - Assigned requirements to teammates
+   - Will wait for next milestone
+- Simone
+- Yashik
 
 ### 2022-04-29 at 10:30
 - Who attended the meeting

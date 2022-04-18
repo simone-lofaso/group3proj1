@@ -186,3 +186,29 @@
 
 7. 
 
+
+Use Case For Non-Functional Requirements:
+
+  1.  Round up for charity
+- **Pre-condition:** Must be in cart page, logged in, and committed to buying a product.
+
+- **Trigger:** The 'Buy Now' button must be clicked in the cart page.
+
+- **Primary Sequence:**
+
+  1. The user clicks the buy button
+  2. The system redirects user to another page
+  3. The page will contain their card information that they have saved and text boxes for the shipping address
+  4. After checking card information and filling out the shipping address they will click the proceed to checkout button
+  5. The user will be redirected to a page that will list all the details pertaining card information, shipping address, costs, number of products, ect
+  6. The user will see a check box to round up for charity.
+  7. The money that is rounded up for charity will be recorded in users profile.
+
+- **Primary Postconditions:** The user will have made a purchase rounded up to nearest dollar and the donation will be recorded in the user profile.
+
+- **Alternate Sequence:**
+
+  1. The system waits for the user to click the buy button in the cart page
+  2. The user clicks the buy button
+  3. The user does not check the round up button
+  4. The payment will not round up to nearest dollar.

@@ -202,7 +202,9 @@ Use Case For Non-Functional Requirements:
   4. After checking card information and filling out the shipping address they will click the proceed to checkout button
   5. The user will be redirected to a page that will list all the details pertaining card information, shipping address, costs, number of products, ect
   6. The user will see a check box to round up for charity.
-  7. The money that is rounded up for charity will be recorded in users profile.
+  7. User clicks the check box and selects ok.
+  8. Final price is displayed rounded up.
+  9. The money that is rounded up for charity will be recorded in users profile.
 
 - **Primary Postconditions:** The user will have made a purchase rounded up to nearest dollar and the donation will be recorded in the user profile.
 
@@ -212,3 +214,25 @@ Use Case For Non-Functional Requirements:
   2. The user clicks the buy button
   3. The user does not check the round up button
   4. The payment will not round up to nearest dollar.
+  
+   2. Change language
+- **Pre-condition:** Must be on website page and logged in
+
+- **Trigger:** After successful login
+
+- **Primary Sequence:**
+
+  1. User logs in successfully
+  2. User will then be prompted to change language (only spanish available)
+  3. User must click between two buttons: English or Spanish
+  4. User selects spanish
+
+
+- **Primary Postconditions:** All information on website from then on will be in spanish
+
+- **Alternate Sequence:**
+
+  1. User successfully logins.
+  2. Clicks on English language
+  3. Website does not change languages.
+  

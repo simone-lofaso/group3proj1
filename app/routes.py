@@ -6,7 +6,8 @@ from flask import render_template,flash, redirect, LoginForm, form
 #This launches to the home page of the website
 @myapp_obj.route('/')
 def home():
-    return "A Clothing Store"
+    return "Welcome"
+    return render_template('home.html', title = 'Sign in')
 
 @myapp_obj.route('/login', methods=['GET', 'POST'])
 def login():

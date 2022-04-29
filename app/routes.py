@@ -1,6 +1,7 @@
 
+
 from app import myapp_obj
-from flask import Flask, flash, redirect, request, url_for
+from flask import Flask, flash, redirect, request
 from flask import render_template
 
 from app import db
@@ -12,7 +13,7 @@ db.create_all()
 users = User.query.all()
 for u in users:
     print(u)
-#db.session.commit()
+# db.session.commit()
 
 #This launches to the home page of the website
 @myapp_obj.route('/')
@@ -32,18 +33,20 @@ def login():
             return render_template('login.html')
         users = User.query.all()
         found = False
-        foundUser = ""
+        foundUser = None
         for user in users:
-            print(user.username)
+            # print(user.username)
             if(user.username == username):
                 foundUser = user
                 found = True
         
         if found:
             print('valid')
-            verify = foundUser.verify_password(password)
+            # print(password)
+            verify = User.verify_password(foundUser, password)
             if verify:
                 print('matched!')
+                return success()
             else:
                 print('no match')
         else:
@@ -52,13 +55,26 @@ def login():
     return render_template('login.html')
 
 
-@myapp_obj.route("/success")
+@myapp_obj.route("/success/<string:name>")
 def success():
     login = True
     return render_template('index.html')
 
+
+#checks if a user exists in a database
+def exists(string):
+    if "@" in string:
+        for user in User.query.all():
+            if user.email == string:
+                return True
+    else:
+        for user in User.query.all():
+            if user.username == string:
+                return True
+    return False
+
 @myapp_obj.route("/account", methods=["POST", "GET"])
-def create():
+def account():
     if request.method == "POST":
         username = request.form['username']
         email = request.form['email']
@@ -66,14 +82,23 @@ def create():
         flash(username)
         flash(email)
         flash(password)
-        if email == None or password == None or username == None:
+        
+        if email == None or not exists(email): 
             print('invalid')
-            return render_template('createAccount.html')
+            return render_template('createAccount.html', valid = True, message = "Email is Taken")
+        elif password == None: 
+            print('invalid')
+            return render_template('createAccount.html', valid = True, message = "Type in a password")
+        elif username == None or not exists(username):
+            print('invalid')
+            return render_template('createAccount.html', valid = True, message = "Username is taken")
+            
         u = User(username=username, email=email)
         u.set_password(password)
-        print(u)
+        # print(u)
         db.session.add(u)
         db.session.commit()
+        
         return success()
     return render_template('createAccount.html')
 

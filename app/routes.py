@@ -1,6 +1,5 @@
-
 from app import myapp_obj
-from flask import Flask, flash, redirect, request, url_for
+from flask import Flask
 from flask import render_template
 
 from app import db
@@ -15,12 +14,9 @@ for u in users:
 #db.session.commit()
 
 #This launches to the home page of the website
-@myapp_obj.route('/', methods = ['POST', 'GET'])
+@myapp_obj.route('/')
 def home():
-    form = SearchForm()
-    if form.validate_on_submit() and request.method == 'POST':
-        return SearchPage()
-    return render_template('home.html',form = form)
+    return render_template('index.html')
 
 #This launches to the login page of the website
 @myapp_obj.route('/login', methods=["POST", "GET"])

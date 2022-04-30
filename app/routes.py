@@ -83,13 +83,13 @@ def account():
         flash(email)
         flash(password)
         
-        if email == None or not exists(email): 
+        if email == None or exists(email): 
             print('invalid')
             return render_template('createAccount.html', valid = True, message = "Email is Taken")
         elif password == None: 
             print('invalid')
             return render_template('createAccount.html', valid = True, message = "Type in a password")
-        elif username == None or not exists(username):
+        elif username == None or exists(username):
             print('invalid')
             return render_template('createAccount.html', valid = True, message = "Username is taken")
             

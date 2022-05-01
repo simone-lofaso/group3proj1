@@ -2,9 +2,10 @@
 from app import myapp_obj
 from flask import Flask, flash, redirect, request, url_for
 from flask import render_template
+from app.forms import ItemForm, SearchForm
 
 from app import db
-from app.models import User
+from app.models import User, Item
 
 login = False
 
@@ -77,3 +78,24 @@ def create():
         return success()
     return render_template('createAccount.html')
 
+@myapp_obj.route("/create_item", methods=["POST", "GET"])
+def item():
+    form = ItemForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            print('form validated')
+            new_item = Item(item_name = form.item_name.data, item_description =form.item_description.data, 
+                            item_price = form.item_price.data)
+            db.session.add(new_item)
+            db.session.commit()
+    return render_template('createitem.html', form=form)
+
+@myapp_obj.route("/search", methods=["POST", "GET"])
+def search():
+    form = SearchForm()
+    return render_template('search.html', form=form)
+
+@myapp_obj.route("/results", methods=["POST", "GET"])
+def result():
+    return render_template('results.html')
+    

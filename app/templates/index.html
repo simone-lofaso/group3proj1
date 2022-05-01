@@ -1,13 +1,16 @@
 <html>
 <h1>The Closet</h1>
 <div class="container">
-    <form action="/login">
-        <button type="submit">Login</button>
-    </form>
-    <form action="/account">
-        <button type="submit">Create Account</button>
-    </form>
-    
+    {% if login %}
+        <h2>Welcome, {{username}}</h2>
+    {% else %}
+        <form action="/login">
+            <button type="submit">Login</button>
+        </form>
+        <form action="/account">
+            <button type="submit">Create Account</button>
+        </form>
+    {% endif %}
 </div>
 
 </html>

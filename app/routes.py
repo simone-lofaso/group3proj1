@@ -14,7 +14,7 @@ users = User.query.all()
 for u in users:
     print(u)
 # db.session.commit()
-
+u
 #This launches to the home page of the website
 @myapp_obj.route('/')
 def home():
@@ -57,8 +57,8 @@ def login():
 
 @myapp_obj.route("/success/<string:name>")
 def success():
-    login = True
-    return render_template('index.html')
+    username = u.username
+    return render_template('index.html', login=True, username=username)
 
 
 #checks if a user exists in a database

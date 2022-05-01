@@ -1,0 +1,19 @@
+<html>
+<head>
+    {% if title %}
+        <title>The Closet - {{title}}</title>
+    {% else %}
+        <title>The Closet</title>
+    {% endif %}
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</body>
+</html>

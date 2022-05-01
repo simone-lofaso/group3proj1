@@ -1,7 +1,6 @@
-from app import myapp_obj
+from app import myapp_obj, db
 from flask import Flask, flash, redirect, request, url_for, render_template
-from app import db
-from app.models import User, Products
+from app.models import User, Products, billingInfo
 from app.forms import SaveBillingInfo
 login = False
 
@@ -14,15 +13,29 @@ for u in users:
 #This launches to the home page of the website
 @myapp_obj.route('/', methods=['GET', 'POST'])
 def home():
+    
     return render_template('index.html')
 
 @myapp_obj.route('/billinginfo', methods=['GET', 'POST'])
-def billingInfo():
+def billingInfoFunc():
     form = SaveBillingInfo()
     if form.validate_on_submit():
+        hashed_secCode = setSecCode(form.password.data)
+        billingInfo = billingInfo(name=form.name.data, 
+                                  billingAddress=form.billingAddress.data,
+                                  cardNumber=form.cardNumber.data,
+                                  expirationDate=form.expirationDate.data,
+                                  secCode=hashed_secCode)
+        db.session.add(billingInfo)
+        db.session.commit()
         flash('Billing Info Saved')
         return redirect(url_for('home'))
     return render_template('billingInfo.html', title='Billing Info', form=form)
+
+@myapp_obj.route('/viewbillinginfo', methods=['GET', 'POST'])
+def viewBillingInfo():
+    billinginfo = billingInfo.query.get('user_id')
+    return render_template('viewbillinginfo.html', billingInfo=billingInfo)
  
 @myapp_obj.route('/login', methods=["POST", "GET"])
 def login():

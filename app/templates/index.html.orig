@@ -1,21 +1,48 @@
 <html>
 <h1>The Closet</h1>
-<div class="container">
+<<<<<<< HEAD
+<div>
+    {% if login %}
+        <h2>Welcome, {{username}}</h2>
+        <div>
+            <form action="/billinginfo">
+                <button type="submit">Change Billing Info</button>
+            </form>
+        </div>
+
+        <div>
+            <form action="/postnewproduct">
+                <button type="submit">Post new Product for Sale</button>
+            </form>
+        </div>
+
+    {% else %}
     <form action="/login">
         <button type="submit">Login</button>
     </form>
     <form action="/account">
         <button type="submit">Create Account</button>
     </form>
-<<<<<<< HEAD
-    
-</div>
-
-</html>
 =======
-    <form action="/billinginfo">
-        <button type="submit"> Billing Info</button>
+<div class="container">
+    {% if login %}
+        <h2>Welcome, {{username}}</h2>
+        <form action = "/">
+            <button type="submit">Logout</button>
+        </form>
+
+        <form action = "/delete" method = "POST">
+            <button type="submit">Delete Account</button>
+        </form>
+    {% else %}
+        <form action="/login">
+            <button type="submit">Login</button>
+        </form>
+        <form action="/account">
+            <button type="submit">Create Account</button>
+        </form>
+>>>>>>> a8dc595f5b5a848d3fbc8509ab2c96aba1550cdd
+    {% endif %}
 </div>
 
 </html>
->>>>>>> allen_branch

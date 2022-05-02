@@ -7,14 +7,15 @@ login = False
 
 db.create_all()
 users = User.query.all()
-for u in users:
-    print(u)
-#db.session.commit()
-u
+for user in users:
+    # db.session.delete(user)
+    print(user)
+# db.session.commit()
+global u
 #This launches to the home page of the website
 @myapp_obj.route('/', methods=['GET', 'POST'])
 def home():
-    products = Products.query.all()
+    u = None
     return render_template('index.html')
 
 @myapp_obj.route('/billinginfo', methods=['GET', 'POST'])
@@ -86,7 +87,9 @@ def login():
 
 @myapp_obj.route("/success/<string:name>")
 def success():
-    username = u.username
+    global u
+    global name
+    username = name
     return render_template('index.html', login=True, username=username)
 
 
@@ -122,12 +125,24 @@ def account():
             print('invalid')
             return render_template('createAccount.html', valid = True, message = "Username is taken")
             
+        global u
         u = User(username=username, email=email)
         u.set_password(password)
         # print(u)
         db.session.add(u)
         db.session.commit()
-        
+        global name
+        name = username
         return success()
     return render_template('createAccount.html')
 
+@myapp_obj.route("/delete", methods=["POST", "GET"])
+def delete():
+    if request.method == "POST":
+        for user in users:
+            if user.username == u.username:
+                db.session.delete(user)
+            print(user)
+        db.session.commit()
+        return home()
+    return render_template('index.html')

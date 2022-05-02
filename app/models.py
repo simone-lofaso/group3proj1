@@ -1,3 +1,5 @@
+import base64
+import uuid
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -10,11 +12,12 @@ class User(db.Model):
     billingInfo = db.relationship('billingInfo', backref='cardholder', lazy='dynamic')
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-        print(self.password_hash)
-    
+        self.password_hash = hashCode(password)
+        
     def verify_password(self, pwd):
-        return check_password_hash(self.password_hash, pwd)
+        if hashCode(pwd) == int(self.password_hash):
+           return True
+        return False
 
     def __repr__(self):
         return f'<User {self.username} {self.email}>' 
@@ -44,3 +47,10 @@ class billingInfo(db.Model):
 
     def __repr__(self):
         return f'<billingInfo {self.name} {self.billingAddress} {self.cardNumber}>'
+
+def hashCode(password):
+    salted = 0
+    for letter in password:
+        salted += ord(letter)
+    salted += len(password)
+    return salted

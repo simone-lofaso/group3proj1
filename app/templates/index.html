@@ -3,6 +3,13 @@
 <div class="container">
     {% if login %}
         <h2>Welcome, {{username}}</h2>
+        <form action = "/">
+            <button type="submit">Logout</button>
+        </form>
+
+        <form action = "/delete" method = "POST">
+            <button type="submit">Delete Account</button>
+        </form>
     {% else %}
         <form action="/login">
             <button type="submit">Login</button>

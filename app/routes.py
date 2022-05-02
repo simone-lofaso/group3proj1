@@ -11,13 +11,15 @@ login = False
 
 db.create_all()
 users = User.query.all()
-for u in users:
-    print(u)
+for user in users:
+    # db.session.delete(user)
+    print(user)
 # db.session.commit()
-u
+global u
 #This launches to the home page of the website
 @myapp_obj.route('/')
 def home():
+    u = None
     return render_template('index.html')
 
 #This launches to the login page of the website
@@ -57,7 +59,9 @@ def login():
 
 @myapp_obj.route("/success/<string:name>")
 def success():
-    username = u.username
+    global u
+    global name
+    username = name
     return render_template('index.html', login=True, username=username)
 
 
@@ -93,12 +97,24 @@ def account():
             print('invalid')
             return render_template('createAccount.html', valid = True, message = "Username is taken")
             
+        global u
         u = User(username=username, email=email)
         u.set_password(password)
         # print(u)
         db.session.add(u)
         db.session.commit()
-        
+        global name
+        name = username
         return success()
     return render_template('createAccount.html')
 
+@myapp_obj.route("/delete", methods=["POST", "GET"])
+def delete():
+    if request.method == "POST":
+        for user in users:
+            if user.username == u.username:
+                db.session.delete(user)
+            print(user)
+        db.session.commit()
+        return home()
+    return render_template('index.html')

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.name.label() }}
+                {{ form.name }}
+            </div>
+            <div>   
+                {{ form.billingAddress.label() }}
+                {{ form.billingAddress }}
+            </div>
+            <div>
+                {{ form.expirationDate.label() }}
+                {{ form.expirationDate }}
+            </div>
+            <div>
+                {{ form.securityNumber.label() }}
+                {{ form.securityNumber }}
+            </div>
+            <div>
+                {{ form.submit.label() }}
+                {{ form.submit }}
+            </div>
+
+
+        </form>
+    </div>
+{% endblock content %}

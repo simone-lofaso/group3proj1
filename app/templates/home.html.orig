@@ -1,0 +1,26 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+=======
+<!DOCTYPE>
+>>>>>>> allen_branch
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+<<<<<<< HEAD
+    <form action=="/search" method="POST">
+        {{form.csrf_token}}
+        {{form.search}}
+        {{form.submit}}
+    </form>
+    </body>
+</html>
+
+=======
+        <form action="/SearchResults" method="POST">
+            {{ form.search }}      
+        </form>
+    </body>
+</head>
+>>>>>>> allen_branch

@@ -1,7 +1,12 @@
 <html>
-
+<<<<<<< HEAD
     <div class="container">
         <form action="/account" method = "POST">
+=======
+
+    <div class="container">
+        <form action="/create" method = "POST">
+>>>>>>> allen_branch
             <label for="username"><b>Username</b></label>
             <input type="id" placeholder="Username" name="username" required>
         
@@ -14,8 +19,13 @@
             
             <button type="submit">Create Account</button>
         </form>
+<<<<<<< HEAD
         {% if valid  %}
             <body>{{ message }}</body>
         {% endif %}
     </div>
 </html>
+=======
+    </div>
+</html>
+>>>>>>> allen_branch

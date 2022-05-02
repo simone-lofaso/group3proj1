@@ -12,6 +12,9 @@
                 {{ form.billingAddress }}
             </div>
             <div>
+                {{ form.cardNumber.label() }} 
+                {{ form.cardNumber }}
+            <div>
                 {{ form.expirationDate.label() }}
                 {{ form.expirationDate }}
             </div>
@@ -22,6 +25,10 @@
             <div>
                 {{ form.submit.label() }}
                 {{ form.submit }}
+            </div>
+            <div>
+                {{ form.remember.label() }}
+                {{ form.remember }}
             </div>
 
 

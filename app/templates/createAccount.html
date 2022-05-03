@@ -1,7 +1,10 @@
 <html>
-
     <div class="container">
-        <form action="/create" method = "POST">
+        <form action="/">
+            <button type="submit">Go Back</button>
+        </form>
+        
+        <form action="/account" method = "POST">
             <label for="username"><b>Username</b></label>
             <input type="id" placeholder="Username" name="username" required>
         
@@ -14,5 +17,8 @@
             
             <button type="submit">Create Account</button>
         </form>
+        {% if valid  %}
+            <body>{{ message }}</body>
+        {% endif %}
     </div>
 </html>

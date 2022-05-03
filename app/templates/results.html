@@ -7,6 +7,14 @@
     <title>Results</title>
 </head>
 <body>
-
+    <ul>
+        {%for item in items%}
+            <li>
+                <p>{{item.item_name}}</p>
+                <p>{{item.item_price}}</p>
+                <p>{{item.item_description}}</p>
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

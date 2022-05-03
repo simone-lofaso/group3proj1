@@ -7,7 +7,9 @@
     <title>Search</title>
 </head>
 <body>
+    
     <form action="/results", method="POST">
+        {{form.csrf_token}}
         {{form.search_term.label}}
         {{form.search_term}}
     </form>

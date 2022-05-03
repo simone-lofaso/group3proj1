@@ -135,9 +135,13 @@ def search():
     form = SearchForm()
     return render_template('search.html', form=form)
 
-@myapp_obj.route("/results", methods=["POST", "GET"])
+@myapp_obj.route("/results", methods=["POST"])
 def result():
-    return render_template('results.html')
+    form = SearchForm()
+    if form.validate_on_submit():
+        search_name = str(form.search_term.data).strip()
+        searched_items = Item.query.filter(Item.item_name.contains(search_name))
+        return render_template('results.html', items = list(searched_items))
     
 @myapp_obj.route("/delete", methods=["POST", "GET"])
 def delete():

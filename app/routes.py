@@ -3,7 +3,7 @@
 from app import myapp_obj
 from flask import Flask, flash, redirect, request
 from flask import render_template
-from app.forms import ItemForm, SearchForm
+from app.forms import AddToCartForm, ItemForm, LoginForm, SearchForm
 
 from app import db
 from app.models import User, Item
@@ -138,10 +138,11 @@ def search():
 @myapp_obj.route("/results", methods=["POST"])
 def result():
     form = SearchForm()
+    second_form = AddToCartForm()
     if form.validate_on_submit():
         search_name = str(form.search_term.data).strip()
         searched_items = Item.query.filter(Item.item_name.contains(search_name))
-        return render_template('results.html', items = list(searched_items))
+        return render_template('results.html', items = list(searched_items), form = second_form)
     
 @myapp_obj.route("/delete", methods=["POST", "GET"])
 def delete():
@@ -161,3 +162,34 @@ def delete():
         print(users)
         return home()
     return render_template('index.html')
+
+@myapp_obj.route("/cart", methods = ["POST"])
+def cart():
+    form = LoginForm()
+    if form.validate_on_submit():
+        item_id = int(form.item_id.data)
+        item = Item.query.get(item_id)
+        found = False
+        users = User.query.all()
+        for user in users:
+            if user.username == str(form.username.data):
+                found_user = user
+                found = True
+                break
+        if found:
+            if User.verify_password(found_user, str(form.password.data)):
+                item.buyer = found_user
+                db.session.add(item)
+                db.session.commit()
+                print(found_user.cart)
+                
+        return render_template("cart.html", items=found_user.cart)
+    
+@myapp_obj.route("/cart_login", methods = ["POST"])
+def cart_login():
+    form = AddToCartForm()
+    login_form = LoginForm()
+    if form.validate_on_submit():
+        item_id = int(form.id.data)
+        item = Item.query.get(item_id)
+        return render_template("cartlogin.html", item_id=item_id, form = login_form)

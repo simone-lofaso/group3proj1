@@ -8,8 +8,7 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True) 
     email = db.Column(db.String(128), index=True, unique=True) 
     password_hash = db.Column(db.String(128))
-    
-    
+    cart = db.relationship('Item', backref='buyer')
     
     def set_password(self, password):
         # print(password)
@@ -37,6 +36,4 @@ class Item(db.Model):
     item_name = db.Column(db.String(64), index=True, unique=True)
     item_description = db.Column(db.String(64), index=True, unique=True)
     item_price = db.Column(db.Float, index=True, unique=True)
-        
-
-
+    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)

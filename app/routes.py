@@ -3,15 +3,17 @@ from flask import Flask, flash, redirect, request, url_for, render_template
 from app.models import User, Products, billingInfo
 from app.forms import SaveBillingInfo, PostProductForSale
 
+global login
 login = False
 
 db.create_all()
 users = User.query.all()
-for user in users:
-    # db.session.delete(user)
-    print(user)
+# for user in users:
+#     # db.session.delete(user)
+print(users)
 # db.session.commit()
 global u
+global name
 #This launches to the home page of the website
 @myapp_obj.route('/', methods=['GET', 'POST'])
 def home():
@@ -67,6 +69,8 @@ def login():
         for user in users:
             # print(user.username)
             if(user.username == username):
+                global name
+                name = username
                 foundUser = user
                 found = True
         
@@ -76,7 +80,9 @@ def login():
             verify = User.verify_password(foundUser, password)
             if verify:
                 print('matched!')
-                return success()
+                global login
+                login = True
+                return success(username)
             else:
                 print('no match')
         else:
@@ -86,11 +92,12 @@ def login():
 
 
 @myapp_obj.route("/success/<string:name>")
-def success():
-    global u
-    global name
-    username = name
-    return render_template('index.html', login=True, username=username)
+def success(username):
+    print(username)
+    if username != None:
+        return render_template('index.html', login=True, username=username)
+    else:
+        return render_template('index.html')
 
 
 #checks if a user exists in a database
@@ -133,16 +140,24 @@ def account():
         db.session.commit()
         global name
         name = username
-        return success()
+        return success(name)
     return render_template('createAccount.html')
 
 @myapp_obj.route("/delete", methods=["POST", "GET"])
 def delete():
+    global name
+    print(name)
+    users = User.query.all()
+    # print(name + "\n")
     if request.method == "POST":
-        for user in users:
-            if user.username == u.username:
-                db.session.delete(user)
-            print(user)
+        # for user in users:
+        #     if user.username == name:
+        #         print(user)
+        #         db.session.delete(user)
+        #         name = None
+        User.query.filter(User.username == name).delete()
         db.session.commit()
+        
+        print(users)
         return home()
     return render_template('index.html')

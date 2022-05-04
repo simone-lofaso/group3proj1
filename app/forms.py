@@ -12,10 +12,18 @@ class SearchForm(FlaskForm):
     
 class AddToCartForm(FlaskForm):
     id = HiddenField(validators=[DataRequired()])
+    remove = HiddenField(validators=[DataRequired()])
     submit = SubmitField(label="Add To Cart")
     
 class LoginForm(FlaskForm):
     username = StringField("Username", [DataRequired()])
     password = StringField("Password", [DataRequired()])
+    remove = HiddenField(validators=[DataRequired()])
     item_id = HiddenField(validators=[DataRequired()])
     submit = SubmitField(label = "Login")
+    
+class RemoveFromCart(FlaskForm):
+    item_id = HiddenField(validators=[DataRequired()])
+    remove = HiddenField(validators=[DataRequired()])
+    submit = SubmitField(label="Remove From Cart")
+    

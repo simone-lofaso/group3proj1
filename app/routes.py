@@ -3,7 +3,7 @@
 from app import myapp_obj
 from flask import Flask, flash, redirect, request
 from flask import render_template
-from app.forms import AddToCartForm, ItemForm, LoginForm, SearchForm
+from app.forms import AddToCartForm, ItemForm, LoginForm, RemoveFromCart, SearchForm
 
 from app import db
 from app.models import User, Item
@@ -121,13 +121,10 @@ def item():
     form = ItemForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            print('form validated')
             new_item = Item(item_name = form.item_name.data, item_description=form.item_description.data, 
                             item_price = form.item_price.data)
             db.session.add(new_item)
             db.session.commit()
-        else:
-            print('form not validated')
     return render_template('createitem.html', form=form)
 
 @myapp_obj.route("/search", methods=["POST", "GET"])
@@ -142,7 +139,7 @@ def result():
     if form.validate_on_submit():
         search_name = str(form.search_term.data).strip()
         searched_items = Item.query.filter(Item.item_name.contains(search_name))
-        return render_template('results.html', items = list(searched_items), form = second_form)
+        return render_template('results.html', items = list(searched_items), form = second_form, remove = False)
     
 @myapp_obj.route("/delete", methods=["POST", "GET"])
 def delete():
@@ -165,7 +162,9 @@ def delete():
 
 @myapp_obj.route("/cart", methods = ["POST"])
 def cart():
-    form = LoginForm()
+    form = LoginForm() 
+    second_form=RemoveFromCart()
+    remove = eval(form.remove.data)
     if form.validate_on_submit():
         item_id = int(form.item_id.data)
         item = Item.query.get(item_id)
@@ -178,18 +177,23 @@ def cart():
                 break
         if found:
             if User.verify_password(found_user, str(form.password.data)):
-                item.buyer = found_user
-                db.session.add(item)
-                db.session.commit()
-                print(found_user.cart)
-                
-        return render_template("cart.html", items=found_user.cart)
+                if not remove:
+                    item.buyer = found_user
+                    db.session.add(item)
+                    db.session.commit()
+                else:
+                    item.buyer=None
+                    db.session.add(item)
+                    db.session.commit()
+        return render_template("cart.html", items=found_user.cart, form = second_form)
     
 @myapp_obj.route("/cart_login", methods = ["POST"])
 def cart_login():
-    form = AddToCartForm()
+    add_form = AddToCartForm()
+    remove_form = RemoveFromCart()
     login_form = LoginForm()
-    if form.validate_on_submit():
-        item_id = int(form.id.data)
-        item = Item.query.get(item_id)
-        return render_template("cartlogin.html", item_id=item_id, form = login_form)
+    if add_form.validate_on_submit() or remove_form.validate_on_submit():
+        remove = eval(add_form.remove.data) or eval(remove_form.remove.data)
+        item_type = add_form.id.data or remove_form.item_id.data
+        item_id = int(item_type)
+        return render_template("cartlogin.html", item_id=item_id, form = login_form, remove=str(remove))

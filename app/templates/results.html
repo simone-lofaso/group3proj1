@@ -16,6 +16,7 @@
                 <form action="/cart_login", method="POST">
                     {{form.csrf_token}}
                     {{form.id(value=item.id)}}
+                    {{form.remove(value="False")}}
                     {{form.submit}}
                 </form>
             </li>

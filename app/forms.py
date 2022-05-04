@@ -1,6 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import FileField, StringField, DecimalField, SubmitField, HiddenField
-from wtforms.validators import DataRequired
+from wtforms import StringField, PasswordField, IntegerField, DateField, BooleanField, SubmitField, FileField, TextAreaField, DecimalField, HiddenField
+from wtforms.validators import DataRequired, Length, NumberRange
+    
+
+
 class ItemForm(FlaskForm):
     item_name = StringField("Item Name", [DataRequired()])
     item_description = StringField('Item Description', [DataRequired()])
@@ -30,4 +33,27 @@ class RemoveFromCart(FlaskForm):
 class ItemDescriptionForm(FlaskForm):
     item_id = HiddenField(validators=[DataRequired()])
     go_to = SubmitField(label='Visit Item')
-    
+
+class SaveBillingInfo(FlaskForm):
+    name = StringField('First and last name',
+                       validators=[DataRequired()])
+    billingAddress = StringField('Address',
+                                 validators=[DataRequired()])
+    cardNumber = IntegerField('Card Number',
+                              validators=[DataRequired(),
+                              NumberRange(min=1000000000000000, 
+                                          max=9999999999999999)])
+    expirationDate = DateField('Expiration Date', format='%m-%Y',
+                               validators=[DataRequired()])
+    securityNumber = PasswordField('Sec Code',
+                                   validators=[DataRequired(), 
+                                   Length(min=3, max=3)])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Done')
+
+class PostProductForSale(FlaskForm):
+    name = StringField('Name of Product', validators=[DataRequired()])
+    price = IntegerField('Price', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    item_image = FileField('Image of Product')
+    submit = SubmitField('Post')

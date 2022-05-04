@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+    <form action=="/search" method="POST">
+        {{form.csrf_token}}
+        {{form.search}}
+        {{form.submit}}
+    </form>
+    </body>
+</html>
+

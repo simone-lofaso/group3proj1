@@ -27,3 +27,7 @@ class RemoveFromCart(FlaskForm):
     remove = HiddenField(validators=[DataRequired()])
     submit = SubmitField(label="Remove From Cart")
     
+class ItemDescriptionForm(FlaskForm):
+    item_id = HiddenField(validators=[DataRequired()])
+    go_to = SubmitField(label='Visit Item')
+    

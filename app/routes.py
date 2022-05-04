@@ -3,7 +3,7 @@
 from app import myapp_obj
 from flask import Flask, flash, redirect, request
 from flask import render_template
-from app.forms import AddToCartForm, ItemForm, LoginForm, RemoveFromCart, SearchForm
+from app.forms import AddToCartForm, ItemDescriptionForm, ItemForm, LoginForm, RemoveFromCart, SearchForm
 
 from app import db
 from app.models import User, Item
@@ -136,10 +136,11 @@ def search():
 def result():
     form = SearchForm()
     second_form = AddToCartForm()
+    to_desc = ItemDescriptionForm()
     if form.validate_on_submit():
         search_name = str(form.search_term.data).strip()
         searched_items = Item.query.filter(Item.item_name.contains(search_name))
-        return render_template('results.html', items = list(searched_items), form = second_form, remove = False)
+        return render_template('results.html', items = list(searched_items), form = second_form, remove = False, desc = to_desc)
     
 @myapp_obj.route("/delete", methods=["POST", "GET"])
 def delete():
@@ -197,3 +198,8 @@ def cart_login():
         item_type = add_form.id.data or remove_form.item_id.data
         item_id = int(item_type)
         return render_template("cartlogin.html", item_id=item_id, form = login_form, remove=str(remove))
+    
+@myapp_obj.route("/item/<item_id>")
+def item_view(item_id):
+    item = Item.query.get(item_id)
+    return render_template("item.html", item=item)

@@ -3,23 +3,34 @@ from flask import Flask, flash, redirect, request, url_for, render_template
 from app.models import User, Products, billingInfo
 from app.forms import SaveBillingInfo, PostProductForSale
 
+# This global variable is to check if the website is logged in or not
 global login
 login = False
 
+# This creates the database and stores the variables in the users variable to keep track of
 db.create_all()
 users = User.query.all()
+
+# This is to delete all the users from the database [FOR TESTING PURPOSES]
 # for user in users:
 #     # db.session.delete(user)
-print(users)
 # db.session.commit()
+
+# This prints the users going into the program
+print(users)
+
+# These globals variables keep track of the user (u) and the username (name) currently being logged in
 global u
 global name
-#This launches to the home page of the website
+
+
+# This launches to the home page of the website
 @myapp_obj.route('/', methods=['GET', 'POST'])
 def home():
     u = None
     return render_template('index.html')
 
+# This page launches to the billing info part of the website adding the billing info to the database
 @myapp_obj.route('/billinginfo', methods=['GET', 'POST'])
 def billingInfoFunc():
     form = SaveBillingInfo()
@@ -37,6 +48,7 @@ def billingInfoFunc():
         return redirect(url_for('home'))
     return render_template('billingInfo.html', title='Billing Info', form=form)
 
+# This page routes to the /postnewproduct page and allows the user to add a product to the page on the website.
 @myapp_obj.route('/postnewproduct', methods=['GET', 'POST'])
 def newProductForSale():
     form = PostProductForSale()
@@ -52,7 +64,8 @@ def newProductForSale():
         return redirect(url_for('home'))
     return render_template('newProductForSale.html', title='Post New Product', form=form)
 
-#This launches to the login page of the website
+# This launches to the login page of the website and also checks for the correct username and password with the databse.
+# If the username and password are correct it will login and print valid. If not it would print no match/invalid
 @myapp_obj.route('/login', methods=["POST", "GET"])
 def login():
     if request.method == "POST":
@@ -90,7 +103,7 @@ def login():
             
     return render_template('login.html')
 
-
+# This method gets run if the page gets logged in successfully. Method gets run ONLY if account() is run successfully
 @myapp_obj.route("/success/<string:name>")
 def success(username):
     print(username)
@@ -100,7 +113,7 @@ def success(username):
         return render_template('index.html')
 
 
-#checks if a user exists in a database
+# This is a helper method that checks if a user exists in a database
 def exists(string):
     if "@" in string:
         for user in User.query.all():
@@ -112,6 +125,7 @@ def exists(string):
                 return True
     return False
 
+# This launches the page to the create account page and checks if the email and username can be used. 
 @myapp_obj.route("/account", methods=["POST", "GET"])
 def account():
     if request.method == "POST":
@@ -143,6 +157,8 @@ def account():
         return success(name)
     return render_template('createAccount.html')
 
+
+# This happens if the delete account button is clicked and removes the account from the databse.
 @myapp_obj.route("/delete", methods=["POST", "GET"])
 def delete():
     global name

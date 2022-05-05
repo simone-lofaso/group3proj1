@@ -1,42 +1,45 @@
 <html>
-    <head>
-        <style>
-            body {
-              padding: 25px;
-              background-color: white;
-              color: black;
-              font-size: 25px;
-            }
-            .dark-mode {
-              background-color: black;
-              color: white;
-            }
-          </style>
-    </head>
-        <body>
-            <div class="container">
-                <button onclick="darkMode()">Darkmode</button>
-            <form action="/">
-                <button type="submit">Go Back</button>
-            </form>
 
-            <form action="/login" method = "POST">
-                <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Username" name="username" required>
-            
-                <label for="pw"><b>Password</b></label>
-                <input type="password" placeholder="Password" name="pw" required>
-            
-                <button type="submit">Login</button>
-                <label>
+<head>
+    <style>
+        body {
+            padding: 25px;
+            background-color: white;
+            color: black;
+            font-size: 25px;
+        }
+        
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button onclick="darkMode()">Darkmode</button>
+        <form action="/">
+            <button type="submit">Go Back</button>
+        </form>
+
+        <form action="/login" method="POST">
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Username" name="username" required>
+
+            <label for="pw"><b>Password</b></label>
+            <input type="password" placeholder="Password" name="pw" required>
+
+            <button type="submit">Login</button>
+            <label>
                 <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
-            </form>
-            </div>
-            <script>
-                function darkMode() {
-                  var element = document.body;
-                  element.classList.toggle("dark-mode");
-                }
-              </script>
-        </body>
+        </form>
+    </div>
+    <script>
+        function darkMode() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+    </script>
+</body>

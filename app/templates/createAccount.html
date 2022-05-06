@@ -1,25 +1,35 @@
 <html>
 
-    <div class="container">
-        <form action="/">
-            <button type="submit">Go Back</button>
-        </form>
-        
-        <form action="/account" method = "POST">
-            <label for="username"><b>Username</b></label>
-            <input type="id" placeholder="Username" name="username" required>
-        
-            <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Email" name="email" required>
+<div class="container">
+    <form action="/">
+        <button type="submit">Go Back</button>
+    </form>
 
-            <label for="pw"><b>Password</b></label>
-            <input type="password" placeholder="Password" name="pw" required>
+    <form action="/account" method="POST">
+        <label for="username"><b>Username</b></label>
+        <input type="id" placeholder="Username" name="username" required>
 
-            
-            <button type="submit">Create Account</button>
-        </form>
-        {% if valid  %}
-            <body>{{ message }}</body>
-        {% endif %}
-    </div>
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Email" name="email" required>
+
+        <label for="pw"><b>Password</b></label>
+        <input type="password" placeholder="Password" name="pw" required>
+
+
+        <button type="submit">Create Account</button>
+    </form>
+    {% if valid %}
+
+    <body>{{ message }}</body>
+    {% endif %}
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="./dark.js"></script>
+    <script>
+        function addDarkmodeWidget() {
+            new Darkmode().showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
+</div>
+
 </html>

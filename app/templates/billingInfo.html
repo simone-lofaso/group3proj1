@@ -1,37 +1,37 @@
-{% extends "base.html" %}
-{% block content %}
-    <div>
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
+{% extends "base.html" %} {% block content %}
+<div>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label() }} {{ form.name }}
+        </div>
+        <div>
+            {{ form.billingAddress.label() }} {{ form.billingAddress }}
+        </div>
+        <div>
+            {{ form.cardNumber.label() }} {{ form.cardNumber }}
             <div>
-                {{ form.name.label() }}
-                {{ form.name }}
-            </div>
-            <div>   
-                {{ form.billingAddress.label() }}
-                {{ form.billingAddress }}
-            </div>
-            <div>
-                {{ form.cardNumber.label() }} 
-                {{ form.cardNumber }}
-            <div>
-                {{ form.expirationDate.label() }}
-                {{ form.expirationDate }}
+                {{ form.expirationDate.label() }} {{ form.expirationDate }}
             </div>
             <div>
-                {{ form.securityNumber.label() }}
-                {{ form.securityNumber }}
+                {{ form.securityNumber.label() }} {{ form.securityNumber }}
             </div>
             <div>
-                {{ form.submit.label() }}
-                {{ form.submit }}
+                {{ form.submit.label() }} {{ form.submit }}
             </div>
             <div>
-                {{ form.remember.label() }}
-                {{ form.remember }}
+                {{ form.remember.label() }} {{ form.remember }}
             </div>
 
 
-        </form>
+    </form>
     </div>
-{% endblock content %}
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="./dark.js"></script>
+    <script>
+        function addDarkmodeWidget() {
+            new Darkmode().showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
+    {% endblock content %}

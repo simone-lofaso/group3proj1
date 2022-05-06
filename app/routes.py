@@ -1,7 +1,7 @@
 from app import myapp_obj, db
-from flask import Flask, flash, redirect, request, url_for, render_template
-from app.models import User, Products, billingInfo
-from app.forms import SaveBillingInfo, PostProductForSale
+from flask import flash, redirect, request, url_for, render_template
+from app.forms import AddToCartForm, ItemDescriptionForm, ItemForm, LoginForm, RemoveFromCart, SearchForm, SaveBillingInfo, PostProductForSale
+from app.models import User, Products, BillingInfo, Item
 
 # This global variable is to check if the website is logged in or not
 global login
@@ -36,7 +36,7 @@ def billingInfoFunc():
     form = SaveBillingInfo()
     if form.validate_on_submit():
         hashed_secCode = setSecCode(form.password.data)
-        billingInfo = billingInfo(name=form.name.data, 
+        billingInfo = BillingInfo(name=form.name.data, 
                                   billingAddress=form.billingAddress.data,
                                   cardNumber=form.cardNumber.data,
                                   expirationDate=form.expirationDate.data,
@@ -157,6 +157,32 @@ def account():
         return success(name)
     return render_template('createAccount.html')
 
+@myapp_obj.route("/create_item", methods=["POST", "GET"])
+def item():
+    form = ItemForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            new_item = Item(item_name = form.item_name.data, item_description=form.item_description.data, 
+                            item_price = form.item_price.data)
+            db.session.add(new_item)
+            db.session.commit()
+    return render_template('createitem.html', form=form)
+
+@myapp_obj.route("/search", methods=["POST", "GET"])
+def search():
+    form = SearchForm()
+    return render_template('search.html', form=form)
+
+@myapp_obj.route("/results", methods=["POST"])
+def result():
+    form = SearchForm()
+    second_form = AddToCartForm()
+    to_desc = ItemDescriptionForm()
+    if form.validate_on_submit():
+        search_name = str(form.search_term.data).strip()
+        searched_items = Item.query.filter(Item.item_name.contains(search_name))
+        return render_template('results.html', items = list(searched_items), form = second_form, remove = False, desc = to_desc)
+    
 
 # This happens if the delete account button is clicked and removes the account from the databse.
 @myapp_obj.route("/delete", methods=["POST", "GET"])
@@ -171,3 +197,46 @@ def delete():
         print(users)
         return home()
     return render_template('index.html')
+
+@myapp_obj.route("/cart", methods = ["POST"])
+def cart():
+    form = LoginForm() 
+    second_form=RemoveFromCart()
+    remove = eval(form.remove.data)
+    if form.validate_on_submit():
+        item_id = int(form.item_id.data)
+        item = Item.query.get(item_id)
+        found = False
+        users = User.query.all()
+        for user in users:
+            if user.username == str(form.username.data):
+                found_user = user
+                found = True
+                break
+        if found:
+            if User.verify_password(found_user, str(form.password.data)):
+                if not remove:
+                    item.buyer = found_user
+                    db.session.add(item)
+                    db.session.commit()
+                else:
+                    item.buyer=None
+                    db.session.add(item)
+                    db.session.commit()
+        return render_template("cart.html", items=found_user.cart, form = second_form)
+    
+@myapp_obj.route("/cart_login", methods = ["POST"])
+def cart_login():
+    add_form = AddToCartForm()
+    remove_form = RemoveFromCart()
+    login_form = LoginForm()
+    if add_form.validate_on_submit() or remove_form.validate_on_submit():
+        remove = eval(add_form.remove.data) or eval(remove_form.remove.data)
+        item_type = add_form.id.data or remove_form.item_id.data
+        item_id = int(item_type)
+        return render_template("cartlogin.html", item_id=item_id, form = login_form, remove=str(remove))
+    
+@myapp_obj.route("/item/<item_id>")
+def item_view(item_id):
+    item = Item.query.get(item_id)
+    return render_template("item.html", item=item)

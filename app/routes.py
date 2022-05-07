@@ -1,6 +1,6 @@
 from app import myapp_obj, db
 from flask import Flask, flash, redirect, request, url_for, render_template
-from app.models import User, Products, billingInfo
+from app.models import User, Products, BillingInfo
 from app.forms import SaveBillingInfo, PostProductForSale
 
 

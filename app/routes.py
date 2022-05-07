@@ -1,7 +1,16 @@
 from app import myapp_obj, db
-from flask import flash, redirect, request, url_for, render_template
-from app.forms import AddToCartForm, ItemDescriptionForm, ItemForm, LoginForm, RemoveFromCart, SearchForm, SaveBillingInfo, PostProductForSale
-from app.models import User, Products, BillingInfo, Item
+from flask import Flask, flash, redirect, request, url_for, render_template
+from app.models import User, Products, billingInfo
+from app.forms import SaveBillingInfo, PostProductForSale
+
+
+from app import myapp_obj
+from flask import Flask, flash, redirect, request
+from flask import render_template
+from app.forms import AddToCartForm, ItemDescriptionForm, ItemForm, LoginForm, RemoveFromCart, SearchForm
+
+from app import db
+from app.models import User, Item
 
 # This global variable is to check if the website is logged in or not
 global login

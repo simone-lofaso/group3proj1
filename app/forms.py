@@ -33,6 +33,8 @@ class RemoveFromCart(FlaskForm):
 class ItemDescriptionForm(FlaskForm):
     item_id = HiddenField(validators=[DataRequired()])
     go_to = SubmitField(label='Visit Item')
+    
+
 
 class SaveBillingInfo(FlaskForm):
     name = StringField('First and last name',

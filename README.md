@@ -4,6 +4,26 @@
 - Simone LoFaso (@simone-lofaso)
 - Yashik Dhanaraj (@dyashik)
 
+#Requirements
+1. Login (Yashik)
+2. Logout (Yashik) 
+3. Create New Account (Yashik)
+4. Delete Account (Yashik)
+5. Search (Simone)
+6. Add to cart (Simone)
+7. Remove from cart (Simone)
+8. View item description (Simone)
+9. Save payment info (Allen)
+10. Buy product (Allen)
+11. Post item for sale (Allen)
+12. *Add pictures for items (Allen)
+
+1. Round up for charity (Saim)
+2. Change Language? (Saim)
+3. Light/Dark Mode? (Saim)
+4. Captcha (Saim)
+
+
 #Istructions
 
 Welcome to The Closet!

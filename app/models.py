@@ -3,6 +3,7 @@ import uuid
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
+#Creates the User and its attributes
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True) 
@@ -23,6 +24,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.username} {self.email} {self.password_hash}>'
 
+#Creates the product and its attributes, connected to user
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name =  db.Column(db.String(64), index=True, unique=False)
@@ -34,6 +36,7 @@ class Products(db.Model):
     def __repr__(self):
         return f'<productsToBuy {self.name} {self.id} {self.price}>'
 
+#Creeates billing info and its attributes, connected to user
 class BillingInfo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True)

@@ -2,7 +2,7 @@ from app import myapp_obj, db
 from flask import Flask, flash, redirect, request, url_for, render_template
 from app.models import User, Products, billingInfo
 from app.forms import SaveBillingInfo, PostProductForSale
-
+#from flask_login import current_user
 global login
 login = False
 
@@ -22,34 +22,48 @@ def home():
 
 @myapp_obj.route('/billinginfo', methods=['GET', 'POST'])
 def billingInfoFunc():
+    global name
+    user = User.query.filter(User.username == name).first()
     form = SaveBillingInfo()
-    if form.validate_on_submit():
-        hashed_secCode = setSecCode(form.password.data)
-        billingInfo = billingInfo(name=form.name.data, 
-                                  billingAddress=form.billingAddress.data,
-                                  cardNumber=form.cardNumber.data,
-                                  expirationDate=form.expirationDate.data,
-                                  secCode=hashed_secCode,
-                                  cardholder=u)
-        db.session.add(billingInfo)
-        db.session.commit()
-        flash('Billing Info Saved')
-        return redirect(url_for('home'))
+    print('start')
+    if request.method == 'POST':
+        print('passed request')
+        if form.validate():
+            print('passed validate')
+            hashed_secCode = setSecCode(form.password.data)
+            billingInfo = billingInfo(name=form.name.data, 
+                                      billingAddress=form.billingAddress.data,
+                                      cardNumber=form.cardNumber.data,
+                                      expirationDate=form.expirationDate.data,
+                                      secCode=hashed_secCode,
+                                      cardholder=cardholder)
+            print('validated')
+            db.session.add(billingInfo)
+            db.session.commit()
+            flash('Billing Info Saved')
+            return redirect(url_for('success'))
+        else:
+            print('not valid')
     return render_template('billingInfo.html', title='Billing Info', form=form)
 
 @myapp_obj.route('/postnewproduct', methods=['GET', 'POST'])
 def newProductForSale():
+    global name
+    user = User.query.filter(User.username == name).first()
     form = PostProductForSale()
+    print('start')
     if form.validate_on_submit():
         productForSale = Products(name=form.name.data,
                                   price=form.price.data,
                                   description=form.description.data,
                                   item_image=form.item_image.data,
-                                  owner=u)
+                                  user_id=user.id)
+        print('validated')
         db.session.add(productForSale)
         db.session.commit()
         flash('New product for sale')
         return redirect(url_for('home'))
+    print('not valid')
     return render_template('newProductForSale.html', title='Post New Product', form=form)
 
 #This launches to the login page of the website

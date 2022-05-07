@@ -9,9 +9,7 @@ class SaveBillingInfo(FlaskForm):
     billingAddress = StringField('Address',
                                  validators=[DataRequired()])
     cardNumber = IntegerField('Card Number',
-                              validators=[DataRequired(),
-                              NumberRange(min=1000000000000000, 
-                                          max=9999999999999999)])
+                              validators=[DataRequired()])
     expirationDate = DateField('Expiration Date', format='%m-%Y',
                                validators=[DataRequired()])
     securityNumber = PasswordField('Sec Code',

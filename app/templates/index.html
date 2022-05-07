@@ -4,7 +4,7 @@
     {% if login %}
         <h2>Welcome, {{username}}</h2>
         <div>
-            <form action="/billinginfo">
+            <form action="/billinginfo" method = "POST">
                 <button type="submit">Change Billing Info</button>
             </form>
         </div>

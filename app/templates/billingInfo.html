@@ -2,17 +2,16 @@
 {% block content %}
     <div>
         <form method="POST" action="">
-            {{ form.hidden_tag() }}
             <div>
                 {{ form.name.label() }}
                 {{ form.name }}
             </div>
-            <div>   
+            <div>
                 {{ form.billingAddress.label() }}
                 {{ form.billingAddress }}
             </div>
             <div>
-                {{ form.cardNumber.label() }} 
+                {{ form.cardNumber.label() }}
                 {{ form.cardNumber }}
             <div>
                 {{ form.expirationDate.label() }}
@@ -23,15 +22,13 @@
                 {{ form.securityNumber }}
             </div>
             <div>
-                {{ form.submit.label() }}
-                {{ form.submit }}
-            </div>
-            <div>
                 {{ form.remember.label() }}
                 {{ form.remember }}
             </div>
-
-
+            <div>
+                {{ form.submit.label() }}
+                {{ form.submit }}
+            </div>
         </form>
     </div>
 {% endblock content %}

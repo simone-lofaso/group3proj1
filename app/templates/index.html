@@ -9,7 +9,7 @@
         {% if login %}
         <h2>Welcome, {{username}}</h2>
         <div>
-            <form action="/billinginfo" method = "POST">
+            <form action="/billinginfo">
                 <button type="submit">Change Billing Info</button>
             </form>
         </div>
@@ -47,8 +47,8 @@
         <form action="/search">
             <button type = "submit">Search for Item</button>
         </form>
-        {% endif %}
-    </div>
+    {% endif %}
+</div>
 
 
         <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>

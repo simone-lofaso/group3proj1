@@ -12,7 +12,8 @@ db.create_all()
 users = User.query.all()
 
 # This is to delete all the users from the database [FOR TESTING PURPOSES]
-# for user in users:#     # db.session.delete(user)
+# for user in users:
+#     # db.session.delete(user)
 # db.session.commit()
 
 # This prints the users going into the program
@@ -36,24 +37,18 @@ def billingInfoFunc():
     user = User.query.filter(User.username == name).first()
     form = SaveBillingInfo()
     print('start')
-    if request.method == 'POST':
-        print('passed request')
-        if form.validate():
-            print('passed validate')
-            hashed_secCode = setSecCode(form.password.data)
-            billingInfo = billingInfo(name=form.name.data,
-                                      billingAddress=form.billingAddress.data,
-                                      cardNumber=form.cardNumber.data,
-                                      expirationDate=form.expirationDate.data,
-                                      secCode=hashed_secCode,
-                                      user_id=user.id)
-            print('validated')
-            db.session.add(billingInfo)
-            db.session.commit()
-            flash('Billing Info Saved')
-            return redirect(url_for('home'))
-        else:
-            print('not valid')
+    if form.validate_on_submit():
+        print('validated')
+        billingInfo = BillingInfo(name=form.name.data,
+                                  billingAddress=form.billingAddress.data,
+                                  cardNumber=form.cardNumber.data,
+                                  expirationDate=form.expirationDate.data,
+                                  secCode=form.secCode.data,
+                                  user_id=user.id)
+        db.session.add(billingInfo)
+        db.session.commit()
+        flash('Billing Info Saved')
+        return redirect(url_for('home'))
     return render_template('billingInfo.html', title='Billing Info', form=form)
 
 # This page routes to the /postnewproduct page and allows the user to add a product to the page on the website.
@@ -62,19 +57,16 @@ def newProductForSale():
     global name
     user = User.query.filter(User.username == name).first()
     form = PostProductForSale()
-    print('start')
     if form.validate_on_submit():
         productForSale = Products(name=form.name.data,
                                   price=form.price.data,
                                   description=form.description.data,
                                   item_image=form.item_image.data,
                                   user_id=user.id)
-        print('validated')
         db.session.add(productForSale)
         db.session.commit()
         flash('New product for sale')
         return redirect(url_for('home'))
-    print('not valid')
     return render_template('newProductForSale.html', title='Post New Product', form=form)
 
 # This launches to the login page of the website and also checks for the correct username and password with the databse.
@@ -203,13 +195,7 @@ def delete():
     global name
     print(name)
     users = User.query.all()
-    # print(name + "\n")
     if request.method == "POST":
-        # for user in users:
-        #     if user.username == name:
-        #         print(user)
-        #         db.session.delete(user)
-        #         name = None
         User.query.filter(User.username == name).delete()
         db.session.commit()
         users = User.query.all()

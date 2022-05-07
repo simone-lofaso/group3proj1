@@ -41,12 +41,11 @@ class SaveBillingInfo(FlaskForm):
                                  validators=[DataRequired()])
     cardNumber = IntegerField('Card Number',
                               validators=[DataRequired()])
-    expirationDate = DateField('Expiration Date', format='%m-%Y',
+    expirationDate = DateField('Expiration Date',
                                validators=[DataRequired()])
-    securityNumber = PasswordField('Sec Code',
+    secCode = PasswordField('Sec Code',
                                    validators=[DataRequired(), 
                                    Length(min=3, max=3)])
-    remember = BooleanField('Remember Me')
     submit = SubmitField('Done')
 
 class PostProductForSale(FlaskForm):
@@ -55,3 +54,4 @@ class PostProductForSale(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired()])
     item_image = FileField('Image of Product')
     submit = SubmitField('Post')
+

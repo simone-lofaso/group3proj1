@@ -10,18 +10,17 @@
         </div>
         <div>
             {{ form.cardNumber.label() }} {{ form.cardNumber }}
-        <div>
-            {{ form.expirationDate.label() }} {{ form.expirationDate }}
-        </div>
-        <div>
-            {{ form.securityNumber.label() }} {{ form.securityNumber }}
-        </div>
-        <div>
-            {{ form.submit.label() }} {{ form.submit }}
-        </div>
-        <div>
-            {{ form.remember.label() }} {{ form.remember }}
-        </div>
+            <div>
+                {{ form.expirationDate.label() }} {{ form.expirationDate }}
+            </div>
+            <div>
+                {{ form.secCode.label() }} {{ form.secCode }}
+            </div>
+            <div>
+                {{ form.submit.label() }} {{ form.submit }}
+            </div>
+
+
     </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
@@ -32,4 +31,4 @@
         }
         window.addEventListener('load', addDarkmodeWidget);
     </script>
-{% endblock content %}
+    {% endblock content %}

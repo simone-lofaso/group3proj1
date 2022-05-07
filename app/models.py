@@ -1,8 +1,7 @@
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
 
-class User(db.Model, UserMixin):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True) 
     email = db.Column(db.String(128), index=True, unique=True) 
@@ -33,16 +32,13 @@ class Products(db.Model):
         return f'<productsToBuy {self.name} {self.id} {self.price}>'
 
 class BillingInfo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True)
     billingAddress = db.Column(db.String(128), index=True)
-    cardNumber = db.Column(db.Integer(), primary_key=True)
+    cardNumber = db.Column(db.Integer())
     expirationDate = db.Column(db.Date)
     secCode = db.Column(db.String(3))
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
-
-    def setSecCode(self, secCode):
-        self.password_hash = generate_password_hash(secCode)
-        return self.password_hash
 
     def __repr__(self):
         return f'<billingInfo {self.name} {self.billingAddress} {self.cardNumber}>'

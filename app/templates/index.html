@@ -1,7 +1,12 @@
 <html>
-<h1>The Closet</h1>
-<div class="container">
-    {% if login %}
+
+<head>
+
+</head>
+
+<body>
+    <div class="container">
+        {% if login %}
         <h2>Welcome, {{username}}</h2>
         <div>
             <form action="/billinginfo" method = "POST">
@@ -9,7 +14,7 @@
             </form>
         </div>
         <div>
-            <form action = "/">
+            <form action="/">
                 <button type="submit">Logout</button>
             </form>
         </div>
@@ -18,17 +23,44 @@
                 <button type="submit">Post new Product for Sale</button>
             </form>
         </div>
-            <form action = "/delete" method = "POST">
-                <button type="submit">Delete Account</button>
-            </form>
-    {% else %}
+        <form action="/delete" method="POST">
+            <button type="submit">Delete Account</button>
+        </form>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+        <script src="./dark.js"></script>
+        <script>
+            function addDarkmodeWidget() {
+                new Darkmode().showWidget();
+            }
+            window.addEventListener('load', addDarkmodeWidget);
+        </script>
+
+        {% else %}
         <form action="/login">
             <button type="submit">Login</button>
         </form>
         <form action="/account">
             <button type="submit">Create Account</button>
         </form>
-    {% endif %}
-</div>
+        <form action="/search">
+            <button type = "submit">Search for Item</button>
+        </form>
+        {% endif %}
+    </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+        <script src="./dark.js"></script>
+        <script>
+            function addDarkmodeWidget() {
+                new Darkmode().showWidget();
+            }
+            window.addEventListener('load', addDarkmodeWidget);
+        </script>
+    </div>
+
+</body>
 
 </html>

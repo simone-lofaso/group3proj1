@@ -1,0 +1,23 @@
+.container {
+    max-width: 600px;
+}
+
+head {
+    text-align: center;
+}
+
+body {
+    background-color: white;
+}
+
+h1 {
+    color: white
+}
+
+h2 {
+    color: white;
+}
+
+p {
+    color: orange;
+}

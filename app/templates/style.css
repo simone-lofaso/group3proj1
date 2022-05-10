@@ -1,10 +1,13 @@
 .container {
     max-width: 600px;
-    margin: 0 auto;
+}
+
+head {
+    text-align: center;
 }
 
 body {
-    background-color: powerderblue;
+    background-color: white;
 }
 
 h1 {
@@ -16,5 +19,5 @@ h2 {
 }
 
 p {
-    color: red;
+    color: orange;
 }

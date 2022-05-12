@@ -19,9 +19,10 @@
 12. *Add pictures for items (Allen)
 
 1. Round up for charity (Saim)
-2. Change Language? (Saim)
-3. Light/Dark Mode? (Saim)
-4. Captcha (Saim)
+2. Expected to work on google chrome (Saim)
+3. Change Language? (Saim)
+4. Light/Dark Mode? (Saim)      
+5. Captcha (Saim)
 
 
 #Istructions

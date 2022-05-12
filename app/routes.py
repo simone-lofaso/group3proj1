@@ -78,6 +78,19 @@ def newProductForSale():
         return redirect(url_for('home'))
     return render_template('newProductForSale.html', title='Post New Product', form=form)
 
+# This page shows user's billingInfo before checking out
+@myapp_obj.route('/confirmBuy', methods=['GET', 'POST'])
+def confirmBuy():
+    global name
+    user = User.query.filter(User.username == name).first()
+    billingInfo = BillingInfo.query.filter(BillingInfo.user_id == user.id).first()
+    print(billingInfo)
+    return render_template('confirmBuy.html', title='Confirm Info', billingInfo=billingInfo)
+
+@myapp_obj.route('/buy', methods=['GET', 'POST'])
+def buy():
+    
+    return render_template('index.html')
 # This launches to the login page of the website and also checks for the correct username and password with the databse.
 # If the username and password are correct it will login and print valid. If not it would print no match/invalid
 @myapp_obj.route('/login', methods=["POST", "GET"])
@@ -238,7 +251,7 @@ def cart():
                     db.session.add(item)
                     db.session.commit()
         return render_template("cart.html", items=found_user.cart, form = second_form)
-    
+
 @myapp_obj.route("/cart_login", methods = ["POST"])
 def cart_login():
     add_form = AddToCartForm()
@@ -249,7 +262,7 @@ def cart_login():
         item_type = add_form.id.data or remove_form.item_id.data
         item_id = int(item_type)
         return render_template("cartlogin.html", item_id=item_id, form = login_form, remove=str(remove))
-    
+
 @myapp_obj.route("/item/<item_id>")
 def item_view(item_id):
     item = Item.query.get(item_id)

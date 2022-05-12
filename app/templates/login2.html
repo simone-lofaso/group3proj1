@@ -1,22 +1,57 @@
-<html>
+<html lang="en">
 
 <head>
-    <style>
-        body {
-            padding: 25px;
-            background-color: white;
-            color: black;
-            font-size: 25px;
-        }
-        
-        .dark-mode {
-            background-color: black;
-            color: white;
-        }
-    </style>
+    <meta charset="UTF-8">
 </head>
 
 <body>
+    //Language change
+    <a href="#eng" data-reload>English</a>
+    <a href="#es" data-reload>Espanol</a>
+    <p id="hi">
+        Welcome
+    </p>
+    <script>
+        var dataReload = document.querySelectorAll("[data-reload]");
+        var language = {
+            eng: {
+                welcome: "Welcome!"
+            },
+            es: {
+                welcome: "Bienvenidos!"
+            }
+        };
+
+        //define language
+        if (window.location.hash) {
+            if (window.location.hash == "#es") {
+                hi.contextContent = language.es.welcome;
+            }
+        }
+        //for reload
+        for (i = 0; i <= dataReload.length; i++) {
+            dataReload[i] = function() {
+                location.reload(true);
+            };
+        }
+    </script>
+
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                    pageLanguage: 'en'
+                },
+                'google_translate_element'
+            );
+        }
+    </script>
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?
+    cb=googleTranslateElementInit">
+    </script>
+
     <div class="container">
         <button onclick="darkMode()">Darkmode</button>
         <form action="/">
@@ -42,4 +77,5 @@
             element.classList.toggle("dark-mode");
         }
     </script>
+
 </body>

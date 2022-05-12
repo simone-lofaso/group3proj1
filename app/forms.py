@@ -2,14 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, IntegerField, DateField, BooleanField, SubmitField, FileField, TextAreaField, DecimalField, HiddenField
 from wtforms.validators import DataRequired, Length, NumberRange
     
-#Creates forms for users to enter information
-
-class ItemForm(FlaskForm):
-    item_name = StringField("Item Name", [DataRequired()])
-    item_description = StringField('Item Description', [DataRequired()])
-    item_price = DecimalField('Item Price', [DataRequired()])
-    submit = SubmitField('create item')
-    
+#Creates forms for users to enter information    
 class SearchForm(FlaskForm):
     search_term = StringField("Search", [DataRequired()])
     
@@ -34,8 +27,6 @@ class ItemDescriptionForm(FlaskForm):
     item_id = HiddenField(validators=[DataRequired()])
     go_to = SubmitField(label='Visit Item')
     
-
-
 class SaveBillingInfo(FlaskForm):
     name = StringField('First and last name',
                        validators=[DataRequired()])

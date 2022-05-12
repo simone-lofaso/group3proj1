@@ -1,16 +1,7 @@
 from app import myapp_obj, db
 from flask import Flask, flash, redirect, request, url_for, render_template
-from app.models import User, Products, billingInfo
-from app.forms import SaveBillingInfo, PostProductForSale
-
-
-from app import myapp_obj
-from flask import Flask, flash, redirect, request
-from flask import render_template
-from app.forms import AddToCartForm, ItemDescriptionForm, ItemForm, LoginForm, RemoveFromCart, SearchForm
-
-from app import db
-from app.models import User, Item
+from app.models import User, Product, BillingInfo, CartProduct
+from app.forms import SaveBillingInfo, PostProductForSale, AddToCartForm, ItemDescriptionForm, LoginForm, RemoveFromCart, SearchForm
 
 # This global variable is to check if the website is logged in or not
 global login
@@ -42,15 +33,18 @@ def home():
 # This page launches to the billing info part of the website adding the billing info to the database
 @myapp_obj.route('/billinginfo', methods=['GET', 'POST'])
 def billingInfoFunc():
+    global name
+    user = User.query.filter(User.username == name).first()
     form = SaveBillingInfo()
+    print('start')
     if form.validate_on_submit():
-        hashed_secCode = setSecCode(form.password.data)
-        billingInfo = billingInfo(name=form.name.data, 
+        print('validated')
+        billingInfo = BillingInfo(name=form.name.data,
                                   billingAddress=form.billingAddress.data,
                                   cardNumber=form.cardNumber.data,
                                   expirationDate=form.expirationDate.data,
-                                  secCode=hashed_secCode,
-                                  cardholder=u)
+                                  secCode=form.secCode.data,
+                                  user_id=user.id)
         db.session.add(billingInfo)
         db.session.commit()
         flash('Billing Info Saved')
@@ -60,13 +54,15 @@ def billingInfoFunc():
 # This page routes to the /postnewproduct page and allows the user to add a product to the page on the website.
 @myapp_obj.route('/postnewproduct', methods=['GET', 'POST'])
 def newProductForSale():
+    global name
+    user = User.query.filter(User.username == name).first()
     form = PostProductForSale()
     if form.validate_on_submit():
-        productForSale = Products(name=form.name.data,
+        productForSale = Product(name=form.name.data,
                                   price=form.price.data,
                                   description=form.description.data,
                                   item_image=form.item_image.data,
-                                  owner=u)
+                                  user_id=user.id)
         db.session.add(productForSale)
         db.session.commit()
         flash('New product for sale')
@@ -166,17 +162,6 @@ def account():
         return success(name)
     return render_template('createAccount.html')
 
-@myapp_obj.route("/create_item", methods=["POST", "GET"])
-def item():
-    form = ItemForm()
-    if request.method == 'POST':
-        if form.validate_on_submit():
-            new_item = Item(item_name = form.item_name.data, item_description=form.item_description.data, 
-                            item_price = form.item_price.data)
-            db.session.add(new_item)
-            db.session.commit()
-    return render_template('createitem.html', form=form)
-
 @myapp_obj.route("/search", methods=["POST", "GET"])
 def search():
     form = SearchForm()
@@ -189,9 +174,8 @@ def result():
     to_desc = ItemDescriptionForm()
     if form.validate_on_submit():
         search_name = str(form.search_term.data).strip()
-        searched_items = Item.query.filter(Item.item_name.contains(search_name))
+        searched_items = Product.query.filter(Product.name.contains(search_name))
         return render_template('results.html', items = list(searched_items), form = second_form, remove = False, desc = to_desc)
-    
 
 # This happens if the delete account button is clicked and removes the account from the databse.
 @myapp_obj.route("/delete", methods=["POST", "GET"])
@@ -213,26 +197,27 @@ def cart():
     second_form=RemoveFromCart()
     remove = eval(form.remove.data)
     if form.validate_on_submit():
-        item_id = int(form.item_id.data)
-        item = Item.query.get(item_id)
-        found = False
         users = User.query.all()
         for user in users:
             if user.username == str(form.username.data):
-                found_user = user
-                found = True
-                break
-        if found:
-            if User.verify_password(found_user, str(form.password.data)):
-                if not remove:
-                    item.buyer = found_user
-                    db.session.add(item)
-                    db.session.commit()
-                else:
-                    item.buyer=None
-                    db.session.add(item)
-                    db.session.commit()
-        return render_template("cart.html", items=found_user.cart, form = second_form)
+                found_user : User = user
+                if User.verify_password(found_user, str(form.password.data)):
+                    if not remove:
+                        new_cart_product = CartProduct(product_id = int(form.item_id.data), 
+                                                       user_id = found_user.id)
+                        db.session.add(new_cart_product)
+                        db.session.commit()
+                    else:
+                        product : Product = Product.query.get(int(form.item_id.data))
+                        for cart_product in found_user.cart:
+                            if cart_product.product() == product:
+                                db.session.delete(cart_product)
+                                db.session.commit()
+                                break
+        items = []
+        for cart_product in found_user.cart:
+            items.append(cart_product.product())
+        return render_template("cart.html", items = items, form = second_form)
     
 @myapp_obj.route("/cart_login", methods = ["POST"])
 def cart_login():
@@ -247,5 +232,5 @@ def cart_login():
     
 @myapp_obj.route("/item/<item_id>")
 def item_view(item_id):
-    item = Item.query.get(item_id)
-    return render_template("item.html", item=item)
+    product = Product.query.get(item_id)
+    return render_template("item.html", item=product)

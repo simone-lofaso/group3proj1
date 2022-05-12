@@ -2,8 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, IntegerField, DateField, BooleanField, SubmitField, FileField, TextAreaField, DecimalField, HiddenField
 from wtforms.validators import DataRequired, Length, NumberRange
     
-#Creates forms for users to enter information
-    
+#Creates forms for users to enter information    
 class SearchForm(FlaskForm):
     search_term = StringField("Search", [DataRequired()])
     

@@ -113,13 +113,13 @@
             var st1 = document.getElementById('captcha').value;
             var st2 = document.getElementById('textinput').value;
             if (st1 == st2) {
-                alert("Form is validated Succesfully, proceed to login");
+                alert("Successful Login");
                 return true;
             } else {
                 login = false;
                 var pw = document.getElementById("pw").value = " ";
                 pw = " ";
-                alert("Please enter a valid captcha");
+                alert("Failed to validate login credentials and or captcha");
 
 
                 // window.location.href = "index.html";

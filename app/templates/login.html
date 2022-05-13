@@ -1,13 +1,63 @@
 <html>
 
 <head>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        
+        h2 {
+            text-align: left;
+        }
+    </style>
     <h1>The Closet</h1>
 
 </head>
 
 <body>
-    <div class="container">
+    <h2 id="hi">
+        Welcome
+    </h2>
+    <a href="#eng" data-reload>English</a>
+    <a href="#es" data-reload>Espanol</a>
 
+    <script>
+        var dataReload = document.querySelectorAll("[data-reload]");
+        var language = {
+            eng: {
+                welcome: "Welcome!"
+            },
+            es: {
+                welcome: "Bienvenidos!"
+            }
+        };
+
+        //define language
+        if (window.location.hash) {
+            if (window.location.hash == "#es") {
+                hi.contextContent = language.es.welcome;
+            }
+        }
+        //for reload
+        for (i = 0; i <= dataReload.length; i++) {
+            dataReload[i] = function() {
+                location.reload(true);
+            };
+        }
+    </script>
+
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                    pageLanguage: 'en'
+                },
+                'google_translate_element'
+            );
+        }
+    </script>
+    <div class="container">
         <form action="/">
             <button type="submit">Go Back</button>
         </form>
@@ -17,14 +67,71 @@
             <input type="text" placeholder="Username" name="username" required>
 
             <label for="pw"><b>Password</b></label>
-            <input type="password" placeholder="Password" name="pw" required>
+            <input type="password" placeholder="Password" id="pw" name="pw" required>
 
-            <button type="submit">Login</button>
+            <!-- <button type="submit">Login</button> -->
             <label>
                 <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
+            <Label><br>Enter Captcha</br></Label>
+            <div class="form-row">
+                <div class="form-group cap">
+                    <input type="text" class="form-control" readonly id="captcha">
+                </div>
+                <div class="form-group cap">
+                    <input type="text" class="form-control" id="textinput" placeholder="Enter Captcha" maxlength="6" spellcheck="false" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button onclick="validcap()" class="btn btn-lg btn-success btn-block">Login</button>
+            </div>
         </form>
+        <h3>Refresh Captcha <img src="refresh.jpg" alt="Refresh" width="50px" onclick="cap()"></h3>
+
     </div>
+    </form>
+    </div>
+    <script type="text/javascript">
+        function cap() {
+            var alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+                'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '@', '#', '$', '%', '^', '&', '*', '+'
+            ];
+            var a = alpha[Math.floor(Math.random() * alpha.length)];
+            var b = alpha[Math.floor(Math.random() * alpha.length)];
+            var c = alpha[Math.floor(Math.random() * alpha.length)];
+            var d = alpha[Math.floor(Math.random() * alpha.length)];
+            var e = alpha[Math.floor(Math.random() * alpha.length)];
+            var f = alpha[Math.floor(Math.random() * alpha.length)];
+
+            var final = a + b + c + d + e + f;
+            document.getElementById("captcha").value = final;
+        }
+        cap()
+
+        function validcap() {
+            var st1 = document.getElementById('captcha').value;
+            var st2 = document.getElementById('textinput').value;
+            if (st1 == st2) {
+                alert("Form is validated Succesfully, proceed to login");
+                return true;
+            } else {
+                login = false;
+                var pw = document.getElementById("pw").value = " ";
+                pw = " ";
+                alert("Please enter a valid captcha");
+
+
+                // window.location.href = "index.html";
+                return false;
+
+                // var pw = document.getElementById("pw").value = " ";
+                return render_template('login.html');
+
+
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
     <script src="./dark.js"></script>
     <script>
@@ -33,4 +140,6 @@
         }
         window.addEventListener('load', addDarkmodeWidget);
     </script>
+
+
 </body>

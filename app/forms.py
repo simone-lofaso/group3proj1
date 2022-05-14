@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, IntegerField, DateField, Boolean
 from wtforms.validators import DataRequired, Length, NumberRange
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Creates forms for users to enter information
 
 class ItemForm(FlaskForm):
@@ -11,6 +12,9 @@ class ItemForm(FlaskForm):
     item_price = DecimalField('Item Price', [DataRequired()])
     submit = SubmitField('create item')
     
+=======
+#Creates forms for users to enter information    
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
 #Creates forms for users to enter information    
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
@@ -39,8 +43,11 @@ class ItemDescriptionForm(FlaskForm):
     go_to = SubmitField(label='Visit Item')
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 class SaveBillingInfo(FlaskForm):

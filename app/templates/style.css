@@ -1,6 +1,11 @@
 .container {
 <<<<<<< HEAD
+<<<<<<< HEAD
     max-width: 600px;
+=======
+    max-width: 500px;
+    margin: auto;
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
     max-width: 500px;
     margin: auto;
@@ -9,6 +14,7 @@
 
 head {
     text-align: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -27,6 +33,8 @@ h2 {
 p {
     color: orange;
 =======
+=======
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
     ;
 }
 
@@ -54,5 +62,8 @@ h1 {
 h2 {
     text-align: center;
     padding: 50px;
+<<<<<<< HEAD
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
+=======
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 }

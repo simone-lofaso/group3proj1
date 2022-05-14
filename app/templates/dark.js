@@ -9,7 +9,11 @@ const options = {
     buttonColorLight: '#fff', // default: '#fff'
     saveInCookies: true, // default: true,
 <<<<<<< HEAD
+<<<<<<< HEAD
     label: '🌓', // default: ''
+=======
+    label: 'Yami', // default: ''
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
     label: 'Yami', // default: ''
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079

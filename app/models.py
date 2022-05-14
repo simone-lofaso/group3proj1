@@ -7,8 +7,13 @@ class User(db.Model):
     email = db.Column(db.String(128), index=True, unique=True) 
     password_hash = db.Column(db.String(128))
 <<<<<<< HEAD
+<<<<<<< HEAD
     cart = db.relationship('Item', backref='buyer')   
     products = db.relationship('Products', backref='owner', lazy='dynamic')
+=======
+    cart = db.relationship('CartProduct', backref='buyer')
+    products = db.relationship('Product', backref='owner', lazy='dynamic')
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
     cart = db.relationship('CartProduct', backref='buyer')
     products = db.relationship('Product', backref='owner', lazy='dynamic')
@@ -28,7 +33,11 @@ class User(db.Model):
 
 #Creates the product and its attributes, connected to user
 <<<<<<< HEAD
+<<<<<<< HEAD
 class Products(db.Model):
+=======
+class Product(db.Model):
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
 class Product(db.Model):
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
@@ -61,7 +70,11 @@ class CartProduct(db.Model):
         return user
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Creeates billing info and its attributes, connected to user
+=======
+#Creates billing info and its attributes, connected to user
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
 #Creates billing info and its attributes, connected to user
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079

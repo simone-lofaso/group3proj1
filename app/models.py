@@ -3,13 +3,15 @@ import uuid
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
+#Creates the User and its attributes
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True) 
     email = db.Column(db.String(128), index=True, unique=True) 
-    password_hash = db.Column(db.String(128))    
+    password_hash = db.Column(db.String(128))
+    cart = db.relationship('Item', backref='buyer')   
     products = db.relationship('Products', backref='owner', lazy='dynamic')
-    billingInfo = db.relationship('billingInfo', backref='cardholder', lazy='dynamic')
+    billingInfo = db.relationship('BillingInfo', backref='cardholder', lazy='dynamic')
 
     def set_password(self, password):
         self.password_hash = hashCode(password)
@@ -22,6 +24,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.username} {self.email} {self.password_hash}>'
 
+#Creates the product and its attributes, connected to user
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name =  db.Column(db.String(64), index=True, unique=False)
@@ -33,17 +36,15 @@ class Products(db.Model):
     def __repr__(self):
         return f'<productsToBuy {self.name} {self.id} {self.price}>'
 
-class billingInfo(db.Model):
+#Creeates billing info and its attributes, connected to user
+class BillingInfo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True)
     billingAddress = db.Column(db.String(128), index=True)
-    cardNumber = db.Column(db.Integer(), primary_key=True)
+    cardNumber = db.Column(db.Integer())
     expirationDate = db.Column(db.Date)
     secCode = db.Column(db.String(3))
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
-
-    def setSecCode(self, secCode):
-        self.password_hash = generate_password_hash(secCode)
-        return self.password_hash
 
     def __repr__(self):
         return f'<billingInfo {self.name} {self.billingAddress} {self.cardNumber}>'
@@ -54,3 +55,10 @@ def hashCode(password):
         salted += ord(letter)
     salted += len(password)
     return salted
+
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    item_name = db.Column(db.String(64), index=True, unique=True)
+    item_description = db.Column(db.String(64), index=True, unique=True)
+    item_price = db.Column(db.Float, index=True)
+    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)

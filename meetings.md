@@ -1,6 +1,5 @@
 ## Meetings
 
-
 ### 2022-04-16 at 10:00am
 Members present: Yashik, Allen, Simone, Saim
 - Allen
@@ -22,6 +21,31 @@ Members present: Yashik, Allen, Simone, Saim
   - Met with group to assign requirements (Mine: functional requirements 1 - 4)
   - Will meet for next milestone
  - Saim
+   - Completed use cases for non-functional requirements (1-2)
+   - Updated README.md
+   - Updated meetings.md
+   - Will finish next 2 non-functional requirements before next milestone
+   - Will wait for next milestone
+
+## 2022-05-02 at 10:00am
+Members present: Yashik, Allen, Simone, Saim
+-Allen
+    - Completed adding images for product
+    - Almost done with saving billing info
+    - Almost done with posting a new product
+    - Forms for billinginfo and newproduct are done
+    - Html for billinginfo and newproduct are done
+    - Will finish biilinginfo and newproduct
+    - Did not start on buy requirement
+- Yashik
+    - Completed login, logout, create, and delete account
+    - All files are updated
+    - Will start to help out other team members
+-Simone
+    - Discussed current progress and struggles
+    - Worked on search functional requirement
+    - Will continue work on other requirements to complete before milestone 2 deadline
+- Saim
    - Completed use cases for non-functional requirements (1-2)
    - Updated README.md
    - Updated meetings.md

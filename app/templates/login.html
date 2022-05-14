@@ -1,21 +1,36 @@
 <html>
+
+<head>
+    <h1>The Closet</h1>
+
+</head>
+
+<body>
     <div class="container">
 
         <form action="/">
             <button type="submit">Go Back</button>
         </form>
 
-        <form action="/login" method = "POST">
+        <form action="/login" method="POST">
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Username" name="username" required>
-        
+
             <label for="pw"><b>Password</b></label>
             <input type="password" placeholder="Password" name="pw" required>
-        
+
             <button type="submit">Login</button>
             <label>
-            <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
         </form>
     </div>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="./dark.js"></script>
+    <script>
+        function addDarkmodeWidget() {
+            new Darkmode().showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
+</body>

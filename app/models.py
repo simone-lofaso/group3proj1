@@ -1,7 +1,4 @@
-import base64
-import uuid
 from app import db
-from werkzeug.security import generate_password_hash, check_password_hash
 
 #Creates the User and its attributes
 class User(db.Model):
@@ -9,8 +6,13 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True) 
     email = db.Column(db.String(128), index=True, unique=True) 
     password_hash = db.Column(db.String(128))
+<<<<<<< HEAD
     cart = db.relationship('Item', backref='buyer')   
     products = db.relationship('Products', backref='owner', lazy='dynamic')
+=======
+    cart = db.relationship('CartProduct', backref='buyer')
+    products = db.relationship('Product', backref='owner', lazy='dynamic')
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
     billingInfo = db.relationship('BillingInfo', backref='cardholder', lazy='dynamic')
 
     def set_password(self, password):
@@ -25,18 +27,44 @@ class User(db.Model):
         return f'<User {self.username} {self.email} {self.password_hash}>'
 
 #Creates the product and its attributes, connected to user
+<<<<<<< HEAD
 class Products(db.Model):
+=======
+class Product(db.Model):
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
     id = db.Column(db.Integer, primary_key=True)
     name =  db.Column(db.String(64), index=True, unique=False)
     price = db.Column(db.Integer())
     description = db.Column(db.Text)
     item_image = db.Column(db.String(20), default='default.jpg')
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
-
+    cart = db.relationship('CartProduct')
+    
     def __repr__(self):
         return f'<productsToBuy {self.name} {self.id} {self.price}>'
+    
+class CartProduct(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    product_id = db.Column(db.Integer, db.ForeignKey(Product.id))
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    
+    def __repr__(self):
+        product : Product = Product.query.get(self.product_id)
+        return f'<InCart {product.name}#{self.id} @ {product.price}'
+    
+    def product(self) -> Product:
+        product = Product.query.get(self.product_id)
+        return product
+    
+    def user(self) -> User:
+        user = User.query.get(self.product_id)
+        return user
 
+<<<<<<< HEAD
 #Creeates billing info and its attributes, connected to user
+=======
+#Creates billing info and its attributes, connected to user
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 class BillingInfo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True)

@@ -18,11 +18,20 @@
 11. Post item for sale (Allen)
 12. *Add pictures for items (Allen)
 
+<<<<<<< HEAD
 1. Round up for charity (Saim)
 2. Change Language? (Saim)
 3. Light/Dark Mode? (Saim)
 4. Captcha (Saim)
 
+=======
+1. Round up bill for charity (Saim)
+2. Expected to work on google chrome (Saim)
+3. Multilingual (Saim)
+4. Light/Dark Mode? (Saim)      
+5. Captcha for security (Saim)
+6. Remember login information (Yashik)
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 
 #Istructions
 

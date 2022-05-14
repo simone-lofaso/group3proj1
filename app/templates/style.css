@@ -1,9 +1,15 @@
 .container {
+<<<<<<< HEAD
     max-width: 600px;
+=======
+    max-width: 500px;
+    margin: auto;
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 }
 
 head {
     text-align: center;
+<<<<<<< HEAD
 }
 
 body {
@@ -20,4 +26,33 @@ h2 {
 
 p {
     color: orange;
+=======
+    ;
+}
+
+header {
+    height: 100px;
+    padding: 10px 0;
+}
+
+nav {
+    width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+body {
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    padding: 50px;
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 }

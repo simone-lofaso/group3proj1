@@ -1,7 +1,12 @@
 from app import myapp_obj, db
 from flask import Flask, flash, redirect, request, url_for, render_template
+<<<<<<< HEAD
 from app.models import User, Products, BillingInfo
 from app.forms import SaveBillingInfo, PostProductForSale
+=======
+from app.models import User, Product, BillingInfo, CartProduct
+from app.forms import SaveBillingInfo, PostProductForSale, AddToCartForm, ItemDescriptionForm, LoginForm, RemoveFromCart, SearchForm
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 
 
 from app import myapp_obj
@@ -67,7 +72,7 @@ def newProductForSale():
     user = User.query.filter(User.username == name).first()
     form = PostProductForSale()
     if form.validate_on_submit():
-        productForSale = Products(name=form.name.data,
+        productForSale = Product(name=form.name.data,
                                   price=form.price.data,
                                   description=form.description.data,
                                   item_image=form.item_image.data,
@@ -171,6 +176,7 @@ def account():
         return success(name)
     return render_template('createAccount.html')
 
+<<<<<<< HEAD
 @myapp_obj.route("/create_item", methods=["POST", "GET"])
 def item():
     form = ItemForm()
@@ -182,6 +188,8 @@ def item():
             db.session.commit()
     return render_template('createitem.html', form=form)
 
+=======
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 @myapp_obj.route("/search", methods=["POST", "GET"])
 def search():
     form = SearchForm()
@@ -194,9 +202,14 @@ def result():
     to_desc = ItemDescriptionForm()
     if form.validate_on_submit():
         search_name = str(form.search_term.data).strip()
+<<<<<<< HEAD
         searched_items = Item.query.filter(Item.item_name.contains(search_name))
         return render_template('results.html', items = list(searched_items), form = second_form, remove = False, desc = to_desc)
     
+=======
+        searched_items = Product.query.filter(Product.name.contains(search_name))
+        return render_template('results.html', items = list(searched_items), form = second_form, remove = False, desc = to_desc)
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 
 # This happens if the delete account button is clicked and removes the account from the databse.
 @myapp_obj.route("/delete", methods=["POST", "GET"])
@@ -218,6 +231,7 @@ def cart():
     second_form=RemoveFromCart()
     remove = eval(form.remove.data)
     if form.validate_on_submit():
+<<<<<<< HEAD
         item_id = int(form.item_id.data)
         item = Item.query.get(item_id)
         found = False
@@ -238,6 +252,29 @@ def cart():
                     db.session.add(item)
                     db.session.commit()
         return render_template("cart.html", items=found_user.cart, form = second_form)
+=======
+        users = User.query.all()
+        for user in users:
+            if user.username == str(form.username.data):
+                found_user : User = user
+                if User.verify_password(found_user, str(form.password.data)):
+                    if not remove:
+                        new_cart_product = CartProduct(product_id = int(form.item_id.data), 
+                                                       user_id = found_user.id)
+                        db.session.add(new_cart_product)
+                        db.session.commit()
+                    else:
+                        product : Product = Product.query.get(int(form.item_id.data))
+                        for cart_product in found_user.cart:
+                            if cart_product.product() == product:
+                                db.session.delete(cart_product)
+                                db.session.commit()
+                                break
+        items = []
+        for cart_product in found_user.cart:
+            items.append(cart_product.product())
+        return render_template("cart.html", items = items, form = second_form)
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
     
 @myapp_obj.route("/cart_login", methods = ["POST"])
 def cart_login():
@@ -252,5 +289,10 @@ def cart_login():
     
 @myapp_obj.route("/item/<item_id>")
 def item_view(item_id):
+<<<<<<< HEAD
     item = Item.query.get(item_id)
     return render_template("item.html", item=item)
+=======
+    product = Product.query.get(item_id)
+    return render_template("item.html", item=product)
+>>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079

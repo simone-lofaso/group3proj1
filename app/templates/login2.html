@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    //Language change
+    <a href="#eng" data-reload>English</a>
+    <a href="#es" data-reload>Espanol</a>
+    <p id="hi">
+        Welcome
+    </p>
+    <script>
+        var dataReload = document.querySelectorAll("[data-reload]");
+        var language = {
+            eng: {
+                welcome: "Welcome!"
+            },
+            es: {
+                welcome: "Bienvenidos!"
+            }
+        };
+
+        //define language
+        if (window.location.hash) {
+            if (window.location.hash == "#es") {
+                hi.contextContent = language.es.welcome;
+            }
+        }
+        //for reload
+        for (i = 0; i <= dataReload.length; i++) {
+            dataReload[i] = function() {
+                location.reload(true);
+            };
+        }
+    </script>
+
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                    pageLanguage: 'en'
+                },
+                'google_translate_element'
+            );
+        }
+    </script>
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?
+    cb=googleTranslateElementInit">
+    </script>
+
+    <div class="container">
+        <button onclick="darkMode()">Darkmode</button>
+        <form action="/">
+            <button type="submit">Go Back</button>
+        </form>
+
+        <form action="/login" method="POST">
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Username" name="username" required>
+
+            <label for="pw"><b>Password</b></label>
+            <input type="password" placeholder="Password" name="pw" required>
+
+            <button type="submit">Login</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+        </form>
+    </div>
+    <script>
+        function darkMode() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+    </script>
+
+</body>

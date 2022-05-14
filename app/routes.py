@@ -2,6 +2,7 @@ from app import myapp_obj, db
 from flask import Flask, flash, redirect, request, url_for, render_template
 from app.models import User, Product, BillingInfo, CartProduct
 from app.forms import SaveBillingInfo, PostProductForSale, AddToCartForm, ItemDescriptionForm, LoginForm, RemoveFromCart, SearchForm
+from werkzeug.utils import secure_filename
 
 # This global variable is to check if the website is logged in or not
 global login
@@ -188,8 +189,7 @@ def result():
     if form.validate_on_submit():
         search_name = str(form.search_term.data).strip()
         searched_items = Product.query.filter(Product.name.contains(search_name))
-        return render_template('results.html', items = list(searched_items), form = second_form, remove = False, desc = to_desc)
-    
+        return render_template('results.html', items = list(searched_items), form = second_form, remove = False, desc = to_desc)    
 
 # This happens if the delete account button is clicked and removes the account from the databse.
 @myapp_obj.route("/delete", methods=["POST", "GET"])

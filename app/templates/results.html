@@ -11,8 +11,9 @@
         {%for item in items%}
             <li>
                 <p>{{item.name}}</p>
-                <p>{{item.price}}</p>
+                <p>${{item.price}}</p>
                 <p>{{item.description}}</p>
+                <img src="url_for('static', filename={{ item.item_image }}"/>
                 <form action="/cart_login", method="POST">
                     {{form.csrf_token}}
                     {{form.id(value=item.id)}}

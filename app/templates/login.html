@@ -1,6 +1,9 @@
 <html>
 
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <style>
         h1 {
             text-align: center;
@@ -15,27 +18,35 @@
 </head>
 
 <body>
-    <h2 id="hi">
-        Welcome
-    </h2>
+    <div id="menue"></div>
     <a href="#eng" data-reload>English</a>
     <a href="#es" data-reload>Espanol</a>
+
+    <p id="hi">
+        Welcome
+    </p>
+
 
     <script>
         var dataReload = document.querySelectorAll("[data-reload]");
         var language = {
             eng: {
-                welcome: "Welcome!"
+                welcome: "Welcome!",
+                The: "The",
+                Closet: "Closet"
+
             },
             es: {
-                welcome: "Bienvenidos!"
+                welcome: "Bienvenidos!",
+                The: "La",
+                Closet: "Closeta"
             }
         };
 
         //define language
         if (window.location.hash) {
-            if (window.location.hash == "#es") {
-                hi.contextContent = language.es.welcome;
+            if (window.location.hash === "#es") {
+                hi.textContent = language.es.welcome;
             }
         }
         //for reload
@@ -46,17 +57,6 @@
         }
     </script>
 
-    <div id="google_translate_element"></div>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                    pageLanguage: 'en'
-                },
-                'google_translate_element'
-            );
-        }
-    </script>
     <div class="container">
         <form action="/">
             <button type="submit">Go Back</button>
@@ -113,13 +113,13 @@
             var st1 = document.getElementById('captcha').value;
             var st2 = document.getElementById('textinput').value;
             if (st1 == st2) {
-                alert("Form is validated Succesfully, proceed to login");
+                alert("Successful Login");
                 return true;
             } else {
                 login = false;
                 var pw = document.getElementById("pw").value = " ";
                 pw = " ";
-                alert("Please enter a valid captcha");
+                alert("Failed to validate login credentials and or captcha");
 
 
                 // window.location.href = "index.html";

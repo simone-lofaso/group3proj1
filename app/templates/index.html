@@ -26,10 +26,17 @@
         {% if login %}
         <h2>Welcome, {{username}}</h2>
         <div>
+            <form action="/search">
+                <button type = "submit">Search for Item</button>
+            </form>
             <form action="/billinginfo">
                 <button type="submit">Change Billing Info</button>
             </form>
         </div>
+        <form action="/confirmBuy">
+            <button type="submit">Buy</button>
+        </form>
+
         <div>
             <form action="/">
                 <button type="submit">Logout</button>
@@ -62,6 +69,7 @@
             <button type="submit">Create Account</button>
         </form>
         <form action="/search">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             <button type = "submit">Search for Item</button>
@@ -106,6 +114,9 @@
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
             <button type="submit">Search for Item</button>
+=======
+            <button type = "submit">Search for Item</button>
+>>>>>>> ca212357532940b5d6cc6ae4a6ac702b3a264065
         </form>
         {% endif %}
     </div>
@@ -124,4 +135,7 @@
 </body>
 
 </html>
+<<<<<<< HEAD
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
+=======
+>>>>>>> ca212357532940b5d6cc6ae4a6ac702b3a264065

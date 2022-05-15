@@ -7,6 +7,7 @@ from app.forms import SaveBillingInfo, PostProductForSale
 =======
 from app.models import User, Product, BillingInfo, CartProduct
 from app.forms import SaveBillingInfo, PostProductForSale, AddToCartForm, ItemDescriptionForm, LoginForm, RemoveFromCart, SearchForm
+<<<<<<< HEAD
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 
 
@@ -21,6 +22,9 @@ from app.models import User, Item
 from app.models import User, Product, BillingInfo, CartProduct
 from app.forms import SaveBillingInfo, PostProductForSale, AddToCartForm, ItemDescriptionForm, LoginForm, RemoveFromCart, SearchForm
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
+=======
+from werkzeug.utils import secure_filename
+>>>>>>> ca212357532940b5d6cc6ae4a6ac702b3a264065
 
 # This global variable is to check if the website is logged in or not
 global login
@@ -87,6 +91,25 @@ def newProductForSale():
         flash('New product for sale')
         return redirect(url_for('home'))
     return render_template('newProductForSale.html', title='Post New Product', form=form)
+
+# This page shows user's billingInfo before checking out
+@myapp_obj.route('/confirmBuy', methods=['GET', 'POST'])
+def confirmBuy():
+    global name
+    user = User.query.filter(User.username == name).first()
+    billingInfo = BillingInfo.query.filter(BillingInfo.user_id == user.id).first()
+    print(billingInfo)
+    return render_template('confirmBuy.html', title='Confirm Info', billingInfo=billingInfo)
+
+@myapp_obj.route('/buy', methods=['GET', 'POST'])
+def buy():
+    global name
+    user = User.query.filter(User.username == name).first()
+    cart = CartProduct.query.filter(CartProduct.user_id == user.id).first()
+    products = cart.product(1)
+    print(products)
+    db.session.commit()
+    return render_template('index.html')
 
 # This launches to the login page of the website and also checks for the correct username and password with the databse.
 # If the username and password are correct it will login and print valid. If not it would print no match/invalid
@@ -183,6 +206,7 @@ def account():
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @myapp_obj.route("/create_item", methods=["POST", "GET"])
 def item():
     form = ItemForm()
@@ -198,11 +222,15 @@ def item():
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
+=======
+# Displays search bar where user can input strings to recieve results
+>>>>>>> ca212357532940b5d6cc6ae4a6ac702b3a264065
 @myapp_obj.route("/search", methods=["POST", "GET"])
 def search():
     form = SearchForm()
     return render_template('search.html', form=form)
 
+# Displays the results of the search and places item description and add to cart buttons
 @myapp_obj.route("/results", methods=["POST"])
 def result():
     form = SearchForm()

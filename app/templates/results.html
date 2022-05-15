@@ -19,12 +19,16 @@
                 <p>{{item.name}}</p>
                 <p>{{item.price}}</p>
                 <p>{{item.description}}</p>
+<<<<<<< HEAD
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 =======
                 <p>{{item.name}}</p>
                 <p>{{item.price}}</p>
                 <p>{{item.description}}</p>
 >>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
+=======
+                <img alt="image" src={{item.item_image}} width="200", height="200">
+>>>>>>> ca212357532940b5d6cc6ae4a6ac702b3a264065
                 <form action="/cart_login", method="POST">
                     {{form.csrf_token}}
                     {{form.id(value=item.id)}}

@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block content %}
+<div>
+    <h1>Confirm Card Information</h1>
+    <p>Card Name: {{billingInfo.name}}</p>
+    <p>Billing Address: {{billingInfo.address}}</p>
+    <p>Card Number: {{billingInfo.cardNumber}}</p>
+    <p>Expiration Date: {{billingInfo.expirationDate}}</p>
+    <form action="/buy">
+        <button type = "submit">Confirm</button>
+    </form>
+    
+</div>
+{% endblock content %}

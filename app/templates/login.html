@@ -1,25 +1,21 @@
 <html>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 <head>
-    <h1>The Closet</h1>
-
-</head>
-
-<body>
-    <div class="container">
-=======
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-
-<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         h1 {
             text-align: center;
         }
-        
+
         h2 {
-            text-align: left;
+            text-align: center;
+        }
+
+        .language{
+            text-align: center;
+            padding-bottom: 10px;
         }
     </style>
     <h1>The Closet</h1>
@@ -30,8 +26,10 @@
     <h2 id="hi">
         Welcome
     </h2>
-    <a href="#eng" data-reload>English</a>
-    <a href="#es" data-reload>Espanol</a>
+    <div class = "language">
+        <a href="#eng" data-reload>English</a>
+        <a href="#es" data-reload>Espanol</a>
+    </div>
 
     <script>
         var dataReload = document.querySelectorAll("[data-reload]");
@@ -44,41 +42,6 @@
             }
         };
 
-=======
-
-<head>
-    <style>
-        h1 {
-            text-align: center;
-        }
-        
-        h2 {
-            text-align: left;
-        }
-    </style>
-    <h1>The Closet</h1>
-
-</head>
-
-<body>
-    <h2 id="hi">
-        Welcome
-    </h2>
-    <a href="#eng" data-reload>English</a>
-    <a href="#es" data-reload>Espanol</a>
-
-    <script>
-        var dataReload = document.querySelectorAll("[data-reload]");
-        var language = {
-            eng: {
-                welcome: "Welcome!"
-            },
-            es: {
-                welcome: "Bienvenidos!"
-            }
-        };
-
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
         //define language
         if (window.location.hash) {
             if (window.location.hash == "#es") {
@@ -87,7 +50,7 @@
         }
         //for reload
         for (i = 0; i <= dataReload.length; i++) {
-            dataReload[i] = function() {
+            dataReload[i] = function () {
                 location.reload(true);
             };
         }
@@ -98,76 +61,60 @@
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
-                    pageLanguage: 'en'
-                },
+                pageLanguage: 'en'
+            },
                 'google_translate_element'
             );
         }
     </script>
+
     <div class="container">
-        <form action="/">
-            <button type="submit">Go Back</button>
+        <form action = "/" class = "d-flex justify-content-center">
+            <button class = "btn btn-primary">
+                Go Back
+            </button>
         </form>
-
+        
         <form action="/login" method="POST">
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Username" name="username" required>
-
-            <label for="pw"><b>Password</b></label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <input type="password" placeholder="Password" name="pw" required>
-
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-=======
-            <input type="password" placeholder="Password" id="pw" name="pw" required>
-
-            <!-- <button type="submit">Login</button> -->
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-=======
-            <input type="password" placeholder="Password" id="pw" name="pw" required>
-
-            <!-- <button type="submit">Login</button> -->
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-            <Label><br>Enter Captcha</br></Label>
-            <div class="form-row">
-                <div class="form-group cap">
-                    <input type="text" class="form-control" readonly id="captcha">
-                </div>
-                <div class="form-group cap">
-                    <input type="text" class="form-control" id="textinput" placeholder="Enter Captcha" maxlength="6" spellcheck="false" required>
-                </div>
+            <div class = "form-group username d-flex justify-content-center">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Username" name="username" required>
             </div>
+
+            <div class = " form-group password d-flex justify-content-center">
+                <label for="pw"><b>Password</b></label>
+                <input type="password" placeholder="Password" id="pw" name="pw" required>
+            </div>
+            <!-- <button type="submit">Login</button> -->
+            <!-- <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label> -->
+            <div class = "captcha d-flex justify-content-center">
+                
+                <div class="form-row">
+                    <Label>Enter Captcha</Label>
+                    <div class="form-group cap">
+                        <input type="text" class="form-control" readonly id="captcha">
+                    </div>
+                    <div class="form-group cap">
+                        <input type="text" class="form-control" id="textinput" placeholder="Enter Captcha" maxlength="6"
+                            spellcheck="false" required>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <h6 class = "d-flex justify-content-center">Refresh Captcha <img src="refresh.jpg" alt="Refresh" width="50px" onclick="cap()"></h6>
 
             <div class="form-group">
                 <button onclick="validcap()" class="btn btn-lg btn-success btn-block">Login</button>
             </div>
-<<<<<<< HEAD
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
         </form>
-        <h3>Refresh Captcha <img src="refresh.jpg" alt="Refresh" width="50px" onclick="cap()"></h3>
+        
 
     </div>
     </form>
     </div>
-<<<<<<< HEAD
-=======
-=======
-        </form>
-        <h3>Refresh Captcha <img src="refresh.jpg" alt="Refresh" width="50px" onclick="cap()"></h3>
-
-    </div>
-    </form>
-    </div>
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
     <script type="text/javascript">
         function cap() {
             var alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
@@ -189,7 +136,7 @@
             var st1 = document.getElementById('captcha').value;
             var st2 = document.getElementById('textinput').value;
             if (st1 == st2) {
-                alert("Successful Login");
+                alert("Correct Captcha");
                 return true;
             } else {
                 login = false;
@@ -208,10 +155,6 @@
             }
         }
     </script>
-<<<<<<< HEAD
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-=======
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
     <script src="./dark.js"></script>
     <script>
@@ -220,14 +163,6 @@
         }
         window.addEventListener('load', addDarkmodeWidget);
     </script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
 
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-=======
-
-
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 </body>

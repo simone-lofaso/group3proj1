@@ -1,42 +1,21 @@
 .container {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    max-width: 600px;
-=======
     max-width: 500px;
     margin: auto;
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-=======
-    max-width: 500px;
-    margin: auto;
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
+}
+
+.row{
+    padding: 100px;
+}
+
+.dflex{
+    padding-bottom: 50px;
 }
 
 head {
     text-align: center;
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
 
-body {
-    background-color: white;
-}
-
-h1 {
-    color: white
-}
-
-h2 {
-    color: white;
-}
-
-p {
-    color: orange;
-=======
-=======
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-    ;
-}
+div#heading ul li { display: inline }
 
 header {
     height: 100px;
@@ -62,8 +41,4 @@ h1 {
 h2 {
     text-align: center;
     padding: 50px;
-<<<<<<< HEAD
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-=======
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 }

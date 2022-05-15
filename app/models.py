@@ -6,18 +6,8 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True) 
     email = db.Column(db.String(128), index=True, unique=True) 
     password_hash = db.Column(db.String(128))
-<<<<<<< HEAD
-<<<<<<< HEAD
-    cart = db.relationship('Item', backref='buyer')   
-    products = db.relationship('Products', backref='owner', lazy='dynamic')
-=======
     cart = db.relationship('CartProduct', backref='buyer')
     products = db.relationship('Product', backref='owner', lazy='dynamic')
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-=======
-    cart = db.relationship('CartProduct', backref='buyer')
-    products = db.relationship('Product', backref='owner', lazy='dynamic')
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
     billingInfo = db.relationship('BillingInfo', backref='cardholder', lazy='dynamic')
 
     def set_password(self, password):
@@ -32,15 +22,7 @@ class User(db.Model):
         return f'<User {self.username} {self.email} {self.password_hash}>'
 
 #Creates the product and its attributes, connected to user
-<<<<<<< HEAD
-<<<<<<< HEAD
-class Products(db.Model):
-=======
 class Product(db.Model):
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-=======
-class Product(db.Model):
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
     id = db.Column(db.Integer, primary_key=True)
     name =  db.Column(db.String(64), index=True, unique=False)
     price = db.Column(db.Integer())
@@ -69,15 +51,7 @@ class CartProduct(db.Model):
         user = User.query.get(self.product_id)
         return user
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Creeates billing info and its attributes, connected to user
-=======
 #Creates billing info and its attributes, connected to user
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-=======
-#Creates billing info and its attributes, connected to user
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 class BillingInfo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True)
@@ -96,10 +70,3 @@ def hashCode(password):
         salted += ord(letter)
     salted += len(password)
     return salted
-
-class Item(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    item_name = db.Column(db.String(64), index=True, unique=True)
-    item_description = db.Column(db.String(64), index=True, unique=True)
-    item_price = db.Column(db.Float, index=True)
-    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)

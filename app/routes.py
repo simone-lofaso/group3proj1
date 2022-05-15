@@ -81,8 +81,14 @@ def confirmBuy():
 
 @myapp_obj.route('/buy', methods=['GET', 'POST'])
 def buy():
-    
+    global name
+    user = User.query.filter(User.username == name).first()
+    cart = CartProduct.query.filter(CartProduct.user_id == user.id).first()
+    products = cart.product(1)
+    print(products)
+    db.session.commit()
     return render_template('index.html')
+
 # This launches to the login page of the website and also checks for the correct username and password with the databse.
 # If the username and password are correct it will login and print valid. If not it would print no match/invalid
 @myapp_obj.route('/login', methods=["POST", "GET"])
@@ -176,11 +182,13 @@ def account():
         return success(name)
     return render_template('createAccount.html')
 
+# Displays search bar where user can input strings to recieve results
 @myapp_obj.route("/search", methods=["POST", "GET"])
 def search():
     form = SearchForm()
     return render_template('search.html', form=form)
 
+# Displays the results of the search and places item description and add to cart buttons
 @myapp_obj.route("/results", methods=["POST"])
 def result():
     form = SearchForm()
@@ -189,7 +197,7 @@ def result():
     if form.validate_on_submit():
         search_name = str(form.search_term.data).strip()
         searched_items = Product.query.filter(Product.name.contains(search_name))
-        return render_template('results.html', items = list(searched_items), form = second_form, remove = False, desc = to_desc)    
+        return render_template('results.html', items = list(searched_items), form = second_form, remove = False, desc = to_desc)
 
 # This happens if the delete account button is clicked and removes the account from the databse.
 @myapp_obj.route("/delete", methods=["POST", "GET"])

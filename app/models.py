@@ -27,7 +27,7 @@ class Product(db.Model):
     name =  db.Column(db.String(64), index=True, unique=False)
     price = db.Column(db.Integer())
     description = db.Column(db.Text)
-    item_image = db.Column(db.String(20), default='default.jpg')
+    item_image = db.Column(db.String(500), default='default.jpg')
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
     cart = db.relationship('CartProduct')
     

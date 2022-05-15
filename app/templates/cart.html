@@ -13,6 +13,7 @@
                 <p>{{item.name}}</p>
                 <p>{{item.price}}</p>
                 <p>{{item.description}}</p>
+                <img alt="image" src={{item.item_image}} width="200", height="200">
                 <form action = "/cart_login", method = "POST">
                    {{ form.csrf_token}}
                    {{form.item_id(value=item.id)}}                   

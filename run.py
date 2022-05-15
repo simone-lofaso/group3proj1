@@ -10,9 +10,6 @@ debug_mode = False
 if '-d' in sys.argv:
     debug_mode = True
     
-if __name__=="__main__":
-    myapp_obj.run(host=os.getenv('IP', '0.0.0.0'), 
-            port=int(os.getenv('PORT', 8888)))
 
 myapp_obj.run(debug=debug_mode)
 

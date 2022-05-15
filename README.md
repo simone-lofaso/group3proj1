@@ -16,30 +16,16 @@
 9. Save payment info (Allen)
 10. Buy product (Allen)
 11. Post item for sale (Allen)
-12. *Add pictures for items (Allen)
+12. Add pictures for items (Allen)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-1. Round up for charity (Saim)
-2. Change Language? (Saim)
-3. Light/Dark Mode? (Saim)
-4. Captcha (Saim)
-
-=======
-=======
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 1. Round up bill for charity (Saim)
 2. Expected to work on google chrome (Saim)
 3. Multilingual (Saim)
 4. Light/Dark Mode? (Saim)      
 5. Captcha for security (Saim)
 6. Remember login information (Yashik)
-<<<<<<< HEAD
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
-=======
->>>>>>> a8ddd76749d69f76e767a9d15798cf6ce8364079
 
-#Istructions
+#Instructions
 
 Welcome to The Closet!
 This will tell you how to use our application and its functions.

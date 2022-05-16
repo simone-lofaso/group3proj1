@@ -2,7 +2,6 @@ from app import myapp_obj, db
 from flask import Flask, flash, redirect, request, url_for, render_template
 from app.models import User, Product, BillingInfo, CartProduct
 from app.forms import SaveBillingInfo, PostProductForSale, AddToCartForm, ItemDescriptionForm, LoginForm, RemoveFromCart, SearchForm
-from werkzeug.utils import secure_filename
 
 # This global variable is to check if the website is logged in or not
 global login
@@ -70,23 +69,32 @@ def newProductForSale():
         return redirect(url_for('home'))
     return render_template('newProductForSale.html', title='Post New Product', form=form)
 
-# This page shows user's billingInfo before checking out
+# This page shows user's billingInfo and total cost before checking out
 @myapp_obj.route('/confirmBuy', methods=['GET', 'POST'])
 def confirmBuy():
     global name
+    cost = 0
     user = User.query.filter(User.username == name).first()
     billingInfo = BillingInfo.query.filter(BillingInfo.user_id == user.id).first()
-    print(billingInfo)
-    return render_template('confirmBuy.html', title='Confirm Info', billingInfo=billingInfo)
+    cart = CartProduct.query.filter(CartProduct.user_id == user.id).all()
+    for product in cart:
+        cost += product.price
+    return render_template('confirmBuy.html', title='Confirm Info', billingInfo=billingInfo, cost=cost)
 
+#Removes the products being bought from the database
 @myapp_obj.route('/buy', methods=['GET', 'POST'])
 def buy():
     global name
+    print(name)
     user = User.query.filter(User.username == name).first()
-    cart = CartProduct.query.filter(CartProduct.user_id == user.id).first()
-    products = cart.product(1)
-    print(products)
-    db.session.commit()
+    print(user)
+    cart = CartProduct.query.filter(CartProduct.user_id == user.id).all()
+    for product in cart:
+        deleteProduct = Product.query.get(product.id)
+        deleteCartProduct = CartProduct.query.get(product.id)
+        db.session.delete(deleteProduct)
+        db.session.delete(deleteCartProduct)
+        db.session.commit()
     return render_template('index.html')
 
 # This launches to the login page of the website and also checks for the correct username and password with the databse.
@@ -213,7 +221,7 @@ def delete():
         return home()
     return render_template('index.html')
 
-@myapp_obj.route("/cart", methods = ["POST"])
+@myapp_obj.route("/cart", methods = ["POST", "GET"])
 def cart():
     form = LoginForm() 
     second_form=RemoveFromCart()

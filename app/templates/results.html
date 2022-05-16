@@ -12,7 +12,7 @@
         {%for item in items%}
             <li>
                 <p>{{item.name}}</p>
-                <p>{{item.price}}</p>
+                <p>${{item.price}}</p>
                 <p>{{item.description}}</p>
                 <img alt="image" src={{item.item_image}} width="200", height="200">
                 <form action="/cart_login", method="POST">

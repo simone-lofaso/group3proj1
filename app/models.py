@@ -1,3 +1,5 @@
+import base64
+import uuid
 from app import db
 
 #Creates the User and its attributes

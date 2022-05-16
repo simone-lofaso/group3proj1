@@ -11,9 +11,6 @@ myapp_obj.config.from_mapping(
     SQLALCHEMY_DATABASE_URI='sqlite:///' + os.path.join(basedir, 'app.db')
 )
 
-UPLOAD_FOLDER = '/uploads'
-myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 db = SQLAlchemy(myapp_obj)
 
 from app import routes, models, forms

@@ -78,7 +78,8 @@ def confirmBuy():
     billingInfo = BillingInfo.query.filter(BillingInfo.user_id == user.id).first()
     cart = CartProduct.query.filter(CartProduct.user_id == user.id).all()
     for product in cart:
-        cost += product.price
+        products = Product.query.get(product.id)
+        cost += products.price
     return render_template('confirmBuy.html', title='Confirm Info', billingInfo=billingInfo, cost=cost)
 
 #Removes the products being bought from the database

@@ -3,10 +3,19 @@
     margin: auto;
 }
 
+.row{
+    padding: 100px;
+}
+
+.dflex{
+    padding-bottom: 50px;
+}
+
 head {
     text-align: center;
-    ;
 }
+
+div#heading ul li { display: inline }
 
 header {
     height: 100px;

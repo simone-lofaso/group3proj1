@@ -69,6 +69,35 @@ def newProductForSale():
         return redirect(url_for('home'))
     return render_template('newProductForSale.html', title='Post New Product', form=form)
 
+# This page shows user's billingInfo and total cost before checking out
+@myapp_obj.route('/confirmBuy', methods=['GET', 'POST'])
+def confirmBuy():
+    global name
+    cost = 0
+    user = User.query.filter(User.username == name).first()
+    billingInfo = BillingInfo.query.filter(BillingInfo.user_id == user.id).first()
+    cart = CartProduct.query.filter(CartProduct.user_id == user.id).all()
+    for product in cart:
+        products = Product.query.get(product.id)
+        cost += products.price
+    return render_template('confirmBuy.html', title='Confirm Info', billingInfo=billingInfo, cost=cost)
+
+#Removes the products being bought from the database
+@myapp_obj.route('/buy', methods=['GET', 'POST'])
+def buy():
+    global name
+    print(name)
+    user = User.query.filter(User.username == name).first()
+    print(user)
+    cart = CartProduct.query.filter(CartProduct.user_id == user.id).all()
+    for product in cart:
+        deleteProduct = Product.query.get(product.id)
+        deleteCartProduct = CartProduct.query.get(product.id)
+        db.session.delete(deleteProduct)
+        db.session.delete(deleteCartProduct)
+        db.session.commit()
+    return render_template('index.html')
+
 # This launches to the login page of the website and also checks for the correct username and password with the databse.
 # If the username and password are correct it will login and print valid. If not it would print no match/invalid
 @myapp_obj.route('/login', methods=["POST", "GET"])
@@ -162,11 +191,13 @@ def account():
         return success(name)
     return render_template('createAccount.html')
 
+# Displays search bar where user can input strings to recieve results
 @myapp_obj.route("/search", methods=["POST", "GET"])
 def search():
     form = SearchForm()
     return render_template('search.html', form=form)
 
+# Displays the results of the search and places item description and add to cart buttons
 @myapp_obj.route("/results", methods=["POST"])
 def result():
     form = SearchForm()
@@ -191,7 +222,7 @@ def delete():
         return home()
     return render_template('index.html')
 
-@myapp_obj.route("/cart", methods = ["POST"])
+@myapp_obj.route("/cart", methods = ["POST", "GET"])
 def cart():
     form = LoginForm() 
     second_form=RemoveFromCart()

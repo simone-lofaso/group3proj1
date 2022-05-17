@@ -4,8 +4,9 @@ from wtforms.validators import DataRequired, Length, NumberRange
     
 #Creates forms for users to enter information    
 class SearchForm(FlaskForm):
-    search_term = StringField("Search", [DataRequired()])
-    
+    search_term = StringField("Search", validators=[DataRequired()])
+    submit = SubmitField(label="Search")
+
 class AddToCartForm(FlaskForm):
     id = HiddenField(validators=[DataRequired()])
     remove = HiddenField(validators=[DataRequired()])
@@ -45,6 +46,5 @@ class PostProductForSale(FlaskForm):
     name = StringField('Name of Product', validators=[DataRequired()])
     price = IntegerField('Price', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
-    item_image = FileField('Image of Product')
+    item_image = StringField('Image of Product')
     submit = SubmitField('Post')
-

@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <ul>
         {% for item in items %}
-            <li>
-                <p>{{item.name}}</p>
-                <p>{{item.price}}</p>
-                <p>{{item.description}}</p>
-                <form action = "/cart_login", method = "POST">
-                   {{ form.csrf_token}}
-                   {{form.item_id(value=item.id)}}                   
-                   {{form.remove(value="True")}}
-                   {{form.submit}}
-                </form>
-            </li>
+        <li>
+            <p>{{item.name}}</p>
+            <p>{{item.price}}</p>
+            <p>{{item.description}}</p>
+            <img alt="image" src={{item.item_image}} width="200" , height="200">
+            <form action="/cart_login" , method="POST">
+                {{ form.csrf_token}} {{form.item_id(value=item.id)}} {{form.remove(value="True")}} {{form.submit}}
+            </form>
+        </li>
         {% endfor %}
     </ul>
-
+    <div>
+        <form action="/buy">
+            <button type="submit">Buy</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="./dark.js"></script>
+    <script>
+        function addDarkmodeWidget() {
+            new Darkmode().showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
 </body>
+
 </html>

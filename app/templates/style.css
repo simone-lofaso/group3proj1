@@ -1,23 +1,44 @@
 .container {
-    max-width: 600px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.row{
+    padding: 100px;
+}
+
+.dflex{
+    padding-bottom: 50px;
 }
 
 head {
     text-align: center;
 }
 
+div#heading ul li { display: inline }
+
+header {
+    height: 100px;
+    padding: 10px 0;
+}
+
+nav {
+    width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
 body {
-    background-color: white;
+    text-align: center;
 }
 
 h1 {
-    color: white
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
 }
 
 h2 {
-    color: white;
-}
-
-p {
-    color: orange;
+    text-align: center;
+    padding: 50px;
 }

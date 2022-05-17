@@ -8,9 +8,19 @@
     <p>Expiration Date: {{billingInfo.expirationDate}}</p>
 
     <p>Total cost: {{cost}}<p>
-    <form action="/buy">
-        <button type = "submit">Confirm</button>
+     <form action="/buy" method="POST">
+        <button type="submit">Confirm</button>
+        <div class="Round-Up">
+            <button onclick="roundUp()" class="btn btn-lg btn-success btn-block">Round Up For Charity</button>
     </form>
-    
+
+    </div>
+    <script type="text/javascript">
+        function roundUp() {
+            x = Math.round(cost);
+            alert("Rounded up for charity" + x);
+        }
+        roundUp()
+    </script>
 </div>
 {% endblock content %}

@@ -217,7 +217,7 @@ def cart():
         items = []
         for cart_product in found_user.cart:
             items.append(cart_product.product())
-        return render_template("cart.html", items = items, form = second_form)
+    return render_template("cart.html", items = items, form = second_form)
     
 @myapp_obj.route("/cart_login", methods = ["POST"])
 def cart_login():
